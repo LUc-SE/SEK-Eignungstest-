@@ -1,11 +1,10 @@
-from pathlib import Path
-
-html = r'''<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SEK Eignungstest</title>
+
 <style>
 :root{
   --bg:#07090b;
@@ -15,9 +14,12 @@ html = r'''<!DOCTYPE html>
   --text:#eef1f3;
   --muted:#8e98a3;
   --accent:#d7dde2;
-  --danger:#b94a48;
 }
-*{box-sizing:border-box}
+
+*{
+  box-sizing:border-box;
+}
+
 body{
   margin:0;
   min-height:100vh;
@@ -30,6 +32,7 @@ body{
     var(--bg);
   background-size:auto,32px 32px,32px 32px,auto;
 }
+
 body:before{
   content:"SEK";
   position:fixed;
@@ -41,18 +44,54 @@ body:before{
   color:rgba(255,255,255,.018);
   pointer-events:none;
 }
-.container{width:min(920px,92%);margin:0 auto;padding:40px 0 60px}
-.header{display:flex;align-items:center;gap:18px;margin-bottom:32px}
+
+.container{
+  width:min(920px,92%);
+  margin:0 auto;
+  padding:40px 0 60px;
+}
+
+.header{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  margin-bottom:32px;
+}
+
 .emblem{
-  width:62px;height:62px;border:1px solid #66717c;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-weight:900;font-size:20px;letter-spacing:1px;
+  width:62px;
+  height:62px;
+  border:1px solid #66717c;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  font-size:20px;
+  letter-spacing:1px;
   background:radial-gradient(circle,#242b32 0 35%,#0d1115 36% 100%);
   box-shadow:0 0 30px rgba(255,255,255,.04);
 }
-.kicker{font-size:12px;letter-spacing:2px;color:#aab3bc;font-weight:700}
-h1{font-size:34px;margin:6px 0 0}
-.subtitle{color:var(--muted);font-size:14px;line-height:1.6;margin-top:7px}
+
+.kicker{
+  font-size:12px;
+  letter-spacing:2px;
+  color:#aab3bc;
+  font-weight:700;
+}
+
+h1{
+  font-size:34px;
+  margin:6px 0 0;
+}
+
+.subtitle{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.6;
+  margin-top:7px;
+}
+
 .card{
   background:linear-gradient(145deg,rgba(20,25,31,.97),rgba(12,16,20,.97));
   border:1px solid var(--line);
@@ -60,12 +99,32 @@ h1{font-size:34px;margin:6px 0 0}
   padding:28px;
   box-shadow:0 20px 60px rgba(0,0,0,.28);
 }
+
 .info{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px 0 26px
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin:22px 0 26px;
 }
-.info div{border:1px solid var(--line);background:#0d1115;border-radius:10px;padding:14px}
-.info strong{display:block;font-size:15px;margin-bottom:4px}
-.info span{font-size:12px;color:var(--muted)}
+
+.info div{
+  border:1px solid var(--line);
+  background:#0d1115;
+  border-radius:10px;
+  padding:14px;
+}
+
+.info strong{
+  display:block;
+  font-size:15px;
+  margin-bottom:4px;
+}
+
+.info span{
+  font-size:12px;
+  color:var(--muted);
+}
+
 .notice{
   border-left:3px solid #737d86;
   padding:12px 15px;
@@ -75,566 +134,1503 @@ h1{font-size:34px;margin:6px 0 0}
   line-height:1.55;
   margin-bottom:22px;
 }
-label{display:block;font-size:13px;color:#b9c0c6;margin-bottom:8px}
-input,textarea{
-  width:100%;background:#0b0e12;border:1px solid var(--line);color:var(--text);
-  border-radius:9px;padding:13px;font-size:14px;outline:none;
+
+label{
+  display:block;
+  font-size:13px;
+  color:#b9c0c6;
+  margin-bottom:8px;
 }
-input:focus,textarea:focus{border-color:#66717c}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+input,
+textarea{
+  width:100%;
+  background:#0b0e12;
+  border:1px solid var(--line);
+  color:var(--text);
+  border-radius:9px;
+  padding:13px;
+  font-size:14px;
+  outline:none;
+}
+
+input:focus,
+textarea:focus{
+  border-color:#66717c;
+}
+
+.form-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
 button{
-  border:1px solid #69737c;background:#dce1e5;color:#0a0d10;
-  padding:13px 18px;border-radius:9px;font-weight:800;cursor:pointer;
+  border:1px solid #69737c;
+  background:#dce1e5;
+  color:#0a0d10;
+  padding:13px 18px;
+  border-radius:9px;
+  font-weight:800;
+  cursor:pointer;
   transition:.15s;
 }
-button:hover{filter:brightness(1.06)}
-button.secondary{background:#171c21;color:#e7ebee;border-color:#343d46}
-.start-btn{width:100%;margin-top:18px}
-.test-top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:16px}
-.counter{font-size:13px;color:#aeb7bf}
-.timer{
-  font-size:20px;font-weight:800;letter-spacing:1px;
-  padding:9px 13px;border:1px solid var(--line);border-radius:9px;background:#0c1014
+
+button:hover{
+  filter:brightness(1.06);
 }
-.timer.warning{border-color:#87504f;color:#efaaa7}
-.progress{height:5px;background:#0b0e11;border-radius:99px;overflow:hidden;margin-bottom:28px}
-.progress-bar{height:100%;width:0;background:#b9c1c8;transition:width .2s}
-.category{font-size:11px;letter-spacing:1.7px;color:#8f9aa5;font-weight:800;text-transform:uppercase;margin-bottom:9px}
-.question{font-size:20px;line-height:1.5;font-weight:700;margin-bottom:20px;white-space:pre-line}
-.scenario{
-  color:#c1c8ce;font-size:14px;line-height:1.65;margin:-5px 0 19px;
+
+button:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
+.start-btn{
+  width:100%;
+  margin-top:18px;
+}
+
+.test-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:16px;
+}
+
+.counter{
+  font-size:13px;
+  color:#aeb7bf;
+}
+
+.timer{
+  font-size:20px;
+  font-weight:800;
+  letter-spacing:1px;
+  padding:9px 13px;
+  border:1px solid var(--line);
+  border-radius:9px;
+  background:#0c1014;
+}
+
+.timer.warning{
+  border-color:#87504f;
+  color:#efaaa7;
+}
+
+.progress{
+  height:5px;
+  background:#0b0e11;
+  border-radius:99px;
+  overflow:hidden;
+  margin-bottom:28px;
+}
+
+.progress-bar{
+  height:100%;
+  width:0;
+  background:#b9c1c8;
+  transition:width .2s;
+}
+
+.category{
+  font-size:11px;
+  letter-spacing:1.7px;
+  color:#8f9aa5;
+  font-weight:800;
+  text-transform:uppercase;
+  margin-bottom:9px;
+}
+
+.question{
+  font-size:20px;
+  line-height:1.5;
+  font-weight:700;
+  margin-bottom:20px;
   white-space:pre-line;
 }
-.answers{display:grid;gap:10px}
+
+.answers{
+  display:grid;
+  gap:10px;
+}
+
 .answer{
-  display:flex;align-items:flex-start;gap:12px;padding:14px;
-  border:1px solid var(--line);border-radius:10px;background:#0c1014;cursor:pointer;
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:#0c1014;
+  cursor:pointer;
   transition:.15s;
 }
-.answer:hover{border-color:#59636c;background:#11161b}
-.answer.selected{border-color:#aeb6bd;background:#181e24}
-.answer input{width:auto;margin-top:3px;accent-color:#c8cdd1}
-.answer span{font-size:14px;line-height:1.5}
-.multiple-note{
-  font-size:12px;color:#9ea8b1;margin:-10px 0 17px
+
+.answer:hover{
+  border-color:#59636c;
+  background:#11161b;
 }
-textarea{min-height:180px;resize:vertical;line-height:1.55}
-.open-hint{font-size:12px;color:#7f8992;margin-top:8px}
-.nav{display:flex;justify-content:flex-end;margin-top:24px}
-.finish{text-align:center;padding:42px 20px}
+
+.answer.selected{
+  border-color:#aeb6bd;
+  background:#181e24;
+}
+
+.answer input{
+  width:auto;
+  margin-top:3px;
+  accent-color:#c8cdd1;
+}
+
+.answer span{
+  font-size:14px;
+  line-height:1.5;
+}
+
+.multiple-note{
+  font-size:12px;
+  color:#9ea8b1;
+  margin:-10px 0 17px;
+}
+
+textarea{
+  min-height:180px;
+  resize:vertical;
+  line-height:1.55;
+}
+
+.open-hint{
+  font-size:12px;
+  color:#7f8992;
+  margin-top:8px;
+}
+
+.nav{
+  display:flex;
+  justify-content:flex-end;
+  margin-top:24px;
+}
+
+.finish{
+  text-align:center;
+  padding:42px 20px;
+}
+
 .finish-mark{
-  width:70px;height:70px;border:1px solid #68727b;border-radius:50%;
-  margin:0 auto 20px;display:flex;align-items:center;justify-content:center;
+  width:70px;
+  height:70px;
+  border:1px solid #68727b;
+  border-radius:50%;
+  margin:0 auto 20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   font-size:28px;
 }
-.finish h2{font-size:27px;margin:0 0 10px}
-.finish p{color:var(--muted);line-height:1.65;font-size:14px}
-.hidden{display:none!important}
+
+.finish h2{
+  font-size:27px;
+  margin:0 0 10px;
+}
+
+.finish p{
+  color:var(--muted);
+  line-height:1.65;
+  font-size:14px;
+}
+
+.hidden{
+  display:none!important;
+}
+
 @media(max-width:650px){
-  .container{padding-top:24px}
-  .form-row,.info{grid-template-columns:1fr}
-  h1{font-size:28px}
-  .card{padding:20px}
-  .question{font-size:18px}
+
+  .container{
+    padding-top:24px;
+  }
+
+  .form-row,
+  .info{
+    grid-template-columns:1fr;
+  }
+
+  h1{
+    font-size:28px;
+  }
+
+  .card{
+    padding:20px;
+  }
+
+  .question{
+    font-size:18px;
+  }
 }
 </style>
 </head>
+
 <body>
+
 <div class="container">
 
   <div class="header">
-    <div class="emblem">SEK</div>
-    <div>
-      <div class="kicker">POLIZEI • SPEZIALEINSATZKOMMANDO</div>
-      <h1>SEK Eignungstest</h1>
-      <div class="subtitle">Theoretische Eignungsprüfung für die Aufnahme in das Spezialeinsatzkommando.</div>
+
+    <div class="emblem">
+      SEK
     </div>
+
+    <div>
+
+      <div class="kicker">
+        POLIZEI • SPEZIALEINSATZKOMMANDO
+      </div>
+
+      <h1>
+        SEK Eignungstest
+      </h1>
+
+      <div class="subtitle">
+        Theoretische Eignungsprüfung für die Aufnahme in das Spezialeinsatzkommando.
+      </div>
+
+    </div>
+
   </div>
 
+
+  <!-- STARTSEITE -->
+
   <section id="startScreen" class="card">
+
     <div class="info">
-      <div><strong>25 Fragen</strong><span>Gemischte Aufgaben</span></div>
-      <div><strong>30:00 Minuten</strong><span>Bearbeitungszeit</span></div>
-      <div><strong>75 %</strong><span>Zum Bestehen erforderlich</span></div>
+
+      <div>
+        <strong>25 Fragen</strong>
+        <span>Gemischte Aufgaben</span>
+      </div>
+
+      <div>
+        <strong>30:00 Minuten</strong>
+        <span>Bearbeitungszeit</span>
+      </div>
+
+      <div>
+        <strong>75 %</strong>
+        <span>Zum Bestehen erforderlich</span>
+      </div>
+
     </div>
+
 
     <div class="notice">
-      Für das Bestehen müssen mindestens <strong>75 % der Gesamtpunktzahl</strong> erreicht werden.
-      Die Aufgaben sind unterschiedlich gewichtet. Bei einzelnen Aufgaben können mehrere Antworten richtig sein.
+
+      Für das Bestehen müssen mindestens
+      <strong>75 % der Gesamtpunktzahl</strong>
+      erreicht werden.
+
+      Die Aufgaben sind unterschiedlich gewichtet.
+
+      Bei einzelnen Aufgaben können mehrere Antworten richtig sein.
+
       Die Bewertung der offenen Antworten erfolgt nachträglich.
+
     </div>
+
 
     <div class="form-row">
+
       <div>
-        <label for="name">Vor- und Nachname</label>
-        <input id="name" type="text" placeholder="Max Mustermann" autocomplete="name">
+
+        <label for="name">
+          Vor- und Nachname
+        </label>
+
+        <input
+          id="name"
+          type="text"
+          placeholder="Max Mustermann"
+          autocomplete="name"
+        >
+
       </div>
+
+
       <div>
-        <label for="dienstnummer">Dienstnummer</label>
-        <input id="dienstnummer" type="text" placeholder="z. B. 10234">
+
+        <label for="dienstnummer">
+          Dienstnummer
+        </label>
+
+        <input
+          id="dienstnummer"
+          type="text"
+          placeholder="z. B. 10234"
+        >
+
       </div>
+
     </div>
 
-    <button id="startButton" class="start-btn">Prüfung beginnen</button>
+
+    <button
+      id="startButton"
+      class="start-btn"
+    >
+      Prüfung beginnen
+    </button>
+
   </section>
 
-  <section id="testScreen" class="card hidden">
-    <div class="test-top">
-      <div class="counter" id="questionCounter">Frage 1 von 25</div>
-      <div class="timer" id="timer">30:00</div>
-    </div>
-    <div class="progress"><div id="progressBar" class="progress-bar"></div></div>
 
-    <div class="category" id="category"></div>
-    <div class="question" id="question"></div>
-    <div class="scenario" id="scenario"></div>
-    <div id="answers" class="answers"></div>
-    <div id="openBox" class="hidden">
-      <textarea id="openAnswer" placeholder="Ihre Antwort..."></textarea>
-      <div class="open-hint">Bitte begründen Sie Ihre Entscheidung nachvollziehbar und präzise.</div>
+  <!-- TEST -->
+
+  <section
+    id="testScreen"
+    class="card hidden"
+  >
+
+    <div class="test-top">
+
+      <div
+        class="counter"
+        id="questionCounter"
+      >
+        Frage 1 von 25
+      </div>
+
+      <div
+        class="timer"
+        id="timer"
+      >
+        30:00
+      </div>
+
     </div>
+
+
+    <div class="progress">
+      <div
+        id="progressBar"
+        class="progress-bar"
+      ></div>
+    </div>
+
+
+    <div
+      class="category"
+      id="category"
+    ></div>
+
+
+    <div
+      class="question"
+      id="question"
+    ></div>
+
+
+    <div
+      id="answers"
+      class="answers"
+    ></div>
+
+
+    <div
+      id="openBox"
+      class="hidden"
+    >
+
+      <textarea
+        id="openAnswer"
+        placeholder="Ihre Antwort..."
+      ></textarea>
+
+      <div class="open-hint">
+        Bitte begründen Sie Ihre Entscheidung nachvollziehbar und präzise.
+      </div>
+
+    </div>
+
 
     <div class="nav">
-      <button id="nextButton">Weiter</button>
+
+      <button id="nextButton">
+        Weiter
+      </button>
+
     </div>
+
   </section>
 
-  <section id="finishScreen" class="card hidden">
+
+  <!-- ABSCHLUSS -->
+
+  <section
+    id="finishScreen"
+    class="card hidden"
+  >
+
     <div class="finish">
-      <div class="finish-mark">✓</div>
-      <h2>Prüfung abgegeben</h2>
+
+      <div class="finish-mark">
+        ✓
+      </div>
+
+      <h2>
+        Prüfung abgegeben
+      </h2>
+
       <p>
         Ihre Prüfung wurde abgegeben.<br>
         Die Auswertung erfolgt nach Abschluss der Prüfung.
       </p>
+
     </div>
+
   </section>
 
 </div>
 
+
 <script>
+
+/* =========================================================
+   SUPABASE
+   ========================================================= */
+
+const SUPABASE_URL =
+  "https://soypinknsaaymijqyhje.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_x1RYV9fzJNWVnvSATvbH6Q_-RtEfa8h";
+
+
+/* =========================================================
+   FRAGEN
+   ========================================================= */
+
 const questions = [
+
   {
-    type:"single", points:2, category:"Lagebeurteilung",
-    question:"Eine Meldung deutet darauf hin, dass sich eine Person allein in einem Gebäude befindet. Kurz darauf wird von anderer Stelle eine zweite Person an einem Fenster gesehen. Welche Aussage trifft am ehesten zu?",
+    type:"single",
+    points:2,
+    category:"Lagebeurteilung",
+
+    question:
+      "Eine Meldung deutet darauf hin, dass sich eine Person allein in einem Gebäude befindet. Kurz darauf wird von anderer Stelle eine zweite Person an einem Fenster gesehen. Welche Aussage trifft am ehesten zu?",
+
     answers:[
       "Die erste Meldung bleibt maßgeblich, weil sie zuerst eingegangen ist.",
       "Die widersprüchliche Information sollte bei der weiteren Lagebeurteilung berücksichtigt werden.",
       "Die zweite Meldung kann ignoriert werden, solange sie nicht mehrfach bestätigt wurde.",
       "Die Lage kann erst bewertet werden, wenn beide Meldungen eindeutig widerlegt oder bestätigt sind."
-    ], correct:[1]
+    ]
   },
+
+
   {
-    type:"single", points:3, category:"Entscheidungsfindung",
-    question:"Zwei Vorgehensweisen erscheinen grundsätzlich geeignet. Eine wäre schneller, die andere würde mit größerer Wahrscheinlichkeit unnötige Risiken für Unbeteiligte vermeiden. Es besteht aktuell keine unmittelbare Gefahr für Personen. Was ist die sinnvollste Überlegung?",
+    type:"single",
+    points:3,
+    category:"Entscheidungsfindung",
+
+    question:
+      "Zwei Vorgehensweisen erscheinen grundsätzlich geeignet. Eine wäre schneller, die andere würde mit größerer Wahrscheinlichkeit unnötige Risiken für Unbeteiligte vermeiden. Es besteht aktuell keine unmittelbare Gefahr für Personen. Was ist die sinnvollste Überlegung?",
+
     answers:[
       "Grundsätzlich immer die schnellere Möglichkeit wählen.",
       "Die Möglichkeit wählen, die am wenigsten Aufwand verursacht.",
       "Erfolgsaussicht, Risiken und mögliche Folgen beider Möglichkeiten gegeneinander abwägen.",
       "Die Entscheidung davon abhängig machen, welche Möglichkeit das Team spontan bevorzugt."
-    ], correct:[2]
+    ]
   },
+
+
   {
-    type:"multi", points:5, category:"Informationsbewertung",
-    question:"Welche Punkte sind bei der Bewertung mehrerer Informationen besonders relevant?",
+    type:"multi",
+    points:5,
+    category:"Informationsbewertung",
+
     multiple:true,
+
+    question:
+      "Welche Punkte sind bei der Bewertung mehrerer Informationen besonders relevant?",
+
     answers:[
       "Wie zuverlässig die jeweilige Quelle einzuschätzen ist.",
       "Ob sich verschiedene Informationen gegenseitig bestätigen oder widersprechen.",
       "Ob eine Information zu der eigenen bisherigen Einschätzung passt.",
       "Ob eine Information für die aktuelle Lage unmittelbar relevant ist."
-    ], correct:[0,1,3]
+    ]
   },
+
+
   {
-    type:"open", points:6, category:"Offene Einschätzung",
-    question:"Sie erhalten eine wichtige Information, deren Richtigkeit bisher nicht überprüft werden konnte. Gleichzeitig muss die Lage weiter beurteilt werden. Wie würden Sie mit dieser Information umgehen und warum?"
+    type:"open",
+    points:6,
+    category:"Offene Einschätzung",
+
+    question:
+      "Sie erhalten eine wichtige Information, deren Richtigkeit bisher nicht überprüft werden konnte. Gleichzeitig muss die Lage weiter beurteilt werden. Wie würden Sie mit dieser Information umgehen und warum?"
   },
+
+
   {
-    type:"single", points:3, category:"Beobachtung und Schlussfolgerung",
-    question:"Eine Person verhält sich auffällig und wirkt angespannt. Konkrete Hinweise auf eine Gefährdung liegen jedoch nicht vor. Welche Schlussfolgerung ist am sinnvollsten?",
+    type:"single",
+    points:2,
+    category:"Beobachtung und Schlussfolgerung",
+
+    question:
+      "Eine Person verhält sich auffällig und wirkt angespannt. Konkrete Hinweise auf eine Gefährdung liegen jedoch nicht vor. Welche Schlussfolgerung ist am sinnvollsten?",
+
     answers:[
       "Das Verhalten reicht aus, um von einer konkreten Gefahr auszugehen.",
       "Auffälliges Verhalten sollte grundsätzlich nicht berücksichtigt werden.",
       "Das Verhalten kann relevant sein, sollte aber zusammen mit weiteren Informationen bewertet werden.",
       "Eine angespannte Person ist grundsätzlich als besonders gefährlich einzustufen."
-    ], correct:[2]
+    ]
   },
+
+
   {
-    type:"single", points:4, category:"Führung und Teamverhalten",
-    question:"Während einer laufenden Lage vertritt ein Teammitglied eine andere Einschätzung als die bisherige gemeinsame Bewertung. Die Person kann ihre Einschätzung nachvollziehbar begründen. Wie sollte damit umgegangen werden?",
+    type:"single",
+    points:3,
+    category:"Führung und Teamverhalten",
+
+    question:
+      "Während einer laufenden Lage vertritt ein Teammitglied eine andere Einschätzung als die bisherige gemeinsame Bewertung. Die Person kann ihre Einschätzung nachvollziehbar begründen. Wie sollte damit umgegangen werden?",
+
     answers:[
       "Die abweichende Einschätzung sollte grundsätzlich zurückgewiesen werden, um die Einheitlichkeit zu erhalten.",
       "Die Einschätzung sollte geprüft werden, insbesondere wenn sie auf neuen oder bisher übersehenen Informationen beruht.",
       "Das Teammitglied sollte seine Einschätzung erst nach Abschluss der Lage äußern.",
       "Die ursprüngliche Entscheidung sollte unabhängig von neuen Argumenten beibehalten werden."
-    ], correct:[1]
+    ]
   },
+
+
   {
-    type:"multi", points:5, category:"Teamkommunikation",
-    question:"Welche Verhaltensweisen tragen in einer anspruchsvollen Lage zu einer funktionierenden Zusammenarbeit bei?",
+    type:"multi",
+    points:5,
+    category:"Teamkommunikation",
+
     multiple:true,
+
+    question:
+      "Welche Verhaltensweisen tragen in einer anspruchsvollen Lage zu einer funktionierenden Zusammenarbeit bei?",
+
     answers:[
       "Relevante Veränderungen zeitnah an das Team weitergeben.",
       "Eigene Zweifel verschweigen, um keine Unsicherheit zu erzeugen.",
       "Widersprüche in Informationen ansprechen.",
       "Entscheidungen anderer grundsätzlich nicht hinterfragen.",
       "Wichtige Informationen klar und verständlich weitergeben."
-    ], correct:[0,2,4]
+    ]
   },
+
+
   {
-    type:"single", points:4, category:"Lageveränderung",
-    question:"Eine Lage entwickelt sich anders als zunächst angenommen. Mehrere neue Informationen verändern die ursprüngliche Einschätzung. Welche Reaktion ist am sinnvollsten?",
+    type:"single",
+    points:4,
+    category:"Lageveränderung",
+
+    question:
+      "Eine Lage entwickelt sich anders als zunächst angenommen. Mehrere neue Informationen verändern die ursprüngliche Einschätzung. Welche Reaktion ist am sinnvollsten?",
+
     answers:[
       "Am ursprünglichen Vorgehen festhalten, um keine Zeit zu verlieren.",
       "Nur die zuletzt eingegangene Information berücksichtigen.",
       "Die neue Informationslage bewerten und die bisherigen Prioritäten gegebenenfalls anpassen.",
       "Die ursprüngliche Einschätzung verteidigen, solange sie nicht eindeutig widerlegt wurde."
-    ], correct:[2]
+    ]
   },
+
+
   {
-    type:"open", points:6, category:"Entscheidungsverhalten",
-    question:"Sie stellen während einer Lage fest, dass eine wichtige Annahme, auf der Ihre bisherige Entscheidung beruht, möglicherweise falsch ist. Was würden Sie als Nächstes tun? Begründen Sie Ihre Vorgehensweise."
+    type:"open",
+    points:6,
+    category:"Entscheidungsverhalten",
+
+    question:
+      "Sie stellen während einer Lage fest, dass eine wichtige Annahme, auf der Ihre bisherige Entscheidung beruht, möglicherweise falsch ist. Was würden Sie als Nächstes tun? Begründen Sie Ihre Vorgehensweise."
   },
+
+
   {
-    type:"single", points:2, category:"Priorisierung",
-    question:"Mehrere Informationen gehen gleichzeitig ein. Welche Information sollte grundsätzlich zuerst betrachtet werden?",
+    type:"single",
+    points:2,
+    category:"Priorisierung",
+
+    question:
+      "Mehrere Informationen gehen gleichzeitig ein. Welche Information sollte grundsätzlich zuerst betrachtet werden?",
+
     answers:[
       "Die Information, die am interessantesten klingt.",
       "Die Information mit dem möglichen unmittelbarsten Einfluss auf die Sicherheit von Personen.",
       "Die Information, die zuerst eingegangen ist.",
       "Die Information, die am einfachsten zu überprüfen ist."
-    ], correct:[1]
+    ]
   },
+
+
   {
-    type:"multi", points:5, category:"Prioritäten",
-    question:"Welche Kriterien können bei der Priorisierung mehrerer gleichzeitig auftretender Probleme eine Rolle spielen?",
+    type:"multi",
+    points:5,
+    category:"Prioritäten",
+
     multiple:true,
+
+    question:
+      "Welche Kriterien können bei der Priorisierung mehrerer gleichzeitig auftretender Probleme eine Rolle spielen?",
+
     answers:[
       "Mögliche unmittelbare Gefahren.",
       "Die möglichen Folgen, wenn ein Problem zunächst nicht bearbeitet wird.",
       "Wie einfach die jeweilige Aufgabe zu lösen ist.",
       "Die persönliche Vorliebe für eine bestimmte Vorgehensweise."
-    ], correct:[0,1,2]
+    ]
   },
+
+
   {
-    type:"single", points:3, category:"Informationslage",
-    question:"Eine Aussage einer Person klingt sehr überzeugend. Es gibt jedoch keine unabhängigen Hinweise, die sie bestätigen. Wie sollte die Aussage eingeordnet werden?",
+    type:"single",
+    points:3,
+    category:"Informationslage",
+
+    question:
+      "Eine Aussage einer Person klingt sehr überzeugend. Es gibt jedoch keine unabhängigen Hinweise, die sie bestätigen. Wie sollte die Aussage eingeordnet werden?",
+
     answers:[
       "Eine überzeugende Darstellung ist grundsätzlich ausreichend.",
       "Sie sollte als mögliche Information berücksichtigt, aber nicht automatisch als gesicherte Tatsache behandelt werden.",
       "Sie sollte grundsätzlich verworfen werden.",
       "Je selbstbewusster eine Person auftritt, desto glaubwürdiger ist ihre Aussage."
-    ], correct:[1]
+    ]
   },
+
+
   {
-    type:"single", points:4, category:"Entscheidung unter Zeitdruck",
-    question:"Eine Entscheidung muss unter Zeitdruck getroffen werden. Es liegen nicht alle Informationen vor, die man sich wünschen würde. Welche Aussage ist am ehesten richtig?",
+    type:"single",
+    points:4,
+    category:"Entscheidung unter Zeitdruck",
+
+    question:
+      "Eine Entscheidung muss unter Zeitdruck getroffen werden. Es liegen nicht alle Informationen vor, die man sich wünschen würde. Welche Aussage ist am ehesten richtig?",
+
     answers:[
       "Ohne vollständige Informationen sollte grundsätzlich keine Entscheidung getroffen werden.",
       "Unter Zeitdruck sollte nur nach dem ersten Eindruck entschieden werden.",
       "Auch unter Zeitdruck sollte zwischen gesicherten Informationen, Annahmen und offenen Punkten unterschieden werden.",
       "Unter Zeitdruck ist es sinnvoll, Unsicherheiten möglichst auszublenden."
-    ], correct:[2]
+    ]
   },
+
+
   {
-    type:"open", points:6, category:"Kommunikation",
-    question:"Ein Teammitglied ist von einer bestimmten Einschätzung überzeugt. Sie halten diese Einschätzung aufgrund der vorliegenden Informationen für nicht ausreichend begründet. Wie würden Sie Ihre Bedenken ansprechen, ohne die Zusammenarbeit unnötig zu belasten?"
+    type:"open",
+    points:6,
+    category:"Kommunikation",
+
+    question:
+      "Ein Teammitglied ist von einer bestimmten Einschätzung überzeugt. Sie halten diese Einschätzung aufgrund der vorliegenden Informationen für nicht ausreichend begründet. Wie würden Sie Ihre Bedenken ansprechen, ohne die Zusammenarbeit unnötig zu belasten?"
   },
+
+
   {
-    type:"single", points:3, category:"Kommunikation",
-    question:"Welche Eigenschaft ist bei einer wichtigen Lageinformation besonders entscheidend?",
+    type:"single",
+    points:3,
+    category:"Kommunikation",
+
+    question:
+      "Welche Eigenschaft ist bei einer wichtigen Lageinformation besonders entscheidend?",
+
     answers:[
       "Sie sollte möglichst ausführlich sein, auch wenn einzelne Details nicht überprüft wurden.",
       "Sie sollte klar, verständlich und für die aktuelle Situation relevant sein.",
       "Sie sollte möglichst überzeugend formuliert sein.",
       "Sie sollte vor allem die eigene Einschätzung unterstützen."
-    ], correct:[1]
+    ]
   },
+
+
   {
-    type:"multi", points:5, category:"Verhältnismäßigkeit",
-    question:"Welche Überlegungen sind bei der Bewertung einer möglichen Entscheidung grundsätzlich sinnvoll?",
+    type:"multi",
+    points:5,
+    category:"Verhältnismäßigkeit",
+
     multiple:true,
+
+    question:
+      "Welche Überlegungen sind bei der Bewertung einer möglichen Entscheidung grundsätzlich sinnvoll?",
+
     answers:[
       "Ist die Maßnahme geeignet, das angestrebte Ziel zu erreichen?",
       "Gibt es eine weniger riskante Möglichkeit, das Ziel ebenfalls zu erreichen?",
       "Welche möglichen Folgen kann die Entscheidung für Beteiligte und Unbeteiligte haben?",
       "Wirkt die Entscheidung nach außen möglichst entschlossen?"
-    ], correct:[0,1,2]
+    ]
   },
+
+
   {
-    type:"single", points:4, category:"Fehlererkennung",
-    question:"Nach einer abgeschlossenen Lage stellt sich heraus, dass eine wichtige Annahme falsch war. Das Ergebnis war trotzdem erfolgreich. Welche Aussage ist am sinnvollsten?",
+    type:"single",
+    points:4,
+    category:"Fehlererkennung",
+
+    question:
+      "Nach einer abgeschlossenen Lage stellt sich heraus, dass eine wichtige Annahme falsch war. Das Ergebnis war trotzdem erfolgreich. Welche Aussage ist am sinnvollsten?",
+
     answers:[
       "Da das Ergebnis erfolgreich war, muss die Entscheidung richtig gewesen sein.",
       "Die falsche Annahme spielt keine Rolle mehr, weil die Lage abgeschlossen ist.",
       "Auch bei einem guten Ergebnis sollte geprüft werden, welche Entscheidungen auf der falschen Annahme beruhten.",
       "Die Verantwortung sollte grundsätzlich bei der Person liegen, von der die falsche Information stammte."
-    ], correct:[2]
+    ]
   },
+
+
   {
-    type:"open", points:6, category:"Selbstreflexion",
-    question:"Eine Entscheidung von Ihnen hat zu dem gewünschten Ergebnis geführt, allerdings waren im Nachhinein unnötige Risiken erkennbar. Wie würden Sie die Entscheidung rückblickend bewerten?"
+    type:"open",
+    points:6,
+    category:"Selbstreflexion",
+
+    question:
+      "Eine Entscheidung von Ihnen hat zu dem gewünschten Ergebnis geführt, allerdings waren im Nachhinein unnötige Risiken erkennbar. Wie würden Sie die Entscheidung rückblickend bewerten?"
   },
+
+
   {
-    type:"single", points:3, category:"Verhalten unter Druck",
-    question:"Eine Person versucht, eine Situation durch provokantes Verhalten emotional aufzuladen. Welche Reaktion spricht am ehesten für eine sachliche Lagebeurteilung?",
+    type:"single",
+    points:3,
+    category:"Verhalten unter Druck",
+
+    question:
+      "Eine Person versucht, eine Situation durch provokantes Verhalten emotional aufzuladen. Welche Reaktion spricht am ehesten für eine sachliche Lagebeurteilung?",
+
     answers:[
       "Sich auf die Provokation einzulassen, um Dominanz zu zeigen.",
       "Das Verhalten grundsätzlich als persönlichen Angriff zu verstehen.",
       "Das Verhalten wahrzunehmen, die eigene Reaktion aber weiterhin an der tatsächlichen Lage auszurichten.",
       "Die Person sofort als ungeeignet für eine weitere Kommunikation einzustufen."
-    ], correct:[2]
+    ]
   },
+
+
   {
-    type:"single", points:3, category:"Abwägung",
-    question:"Sie haben zwei plausible Einschätzungen einer Situation. Keine davon lässt sich derzeit eindeutig bestätigen. Was ist am sinnvollsten?",
+    type:"single",
+    points:3,
+    category:"Abwägung",
+
+    question:
+      "Sie haben zwei plausible Einschätzungen einer Situation. Keine davon lässt sich derzeit eindeutig bestätigen. Was ist am sinnvollsten?",
+
     answers:[
       "Eine Einschätzung auswählen und widersprüchliche Hinweise ignorieren.",
       "Beide Möglichkeiten berücksichtigen und beobachten, welche Informationen die eine oder andere Einschätzung stützen.",
       "Die Einschätzung wählen, die sich am sichersten anfühlt.",
       "Die Entscheidung solange aufschieben, bis vollständige Gewissheit besteht."
-    ], correct:[1]
+    ]
   },
+
+
   {
-    type:"open", points:6, category:"Konflikt zwischen Informationen",
-    question:"Sie erhalten kurz hintereinander drei Informationen: Eine spricht für eine geringe Gefährdung, eine zweite für eine mögliche Gefahr und eine dritte ist noch nicht überprüft. Wie würden Sie diese Informationen in Ihre weitere Beurteilung einbeziehen?"
+    type:"open",
+    points:6,
+    category:"Konflikt zwischen Informationen",
+
+    question:
+      "Sie erhalten kurz hintereinander drei Informationen: Eine spricht für eine geringe Gefährdung, eine zweite für eine mögliche Gefahr und eine dritte ist noch nicht überprüft. Wie würden Sie diese Informationen in Ihre weitere Beurteilung einbeziehen?"
   },
+
+
   {
-    type:"single", points:4, category:"Priorisierung und Verantwortung",
-    question:"Während einer laufenden Lage müssen Sie zwischen mehreren Problemen unterscheiden: Ein Kommunikationsfehler, eine unklare Information und eine mögliche unmittelbare Gefährdung einer unbeteiligten Person. Was sollte bei der Priorisierung entscheidend sein?",
+    type:"single",
+    points:3,
+    category:"Priorisierung und Verantwortung",
+
+    question:
+      "Während einer laufenden Lage müssen Sie zwischen mehreren Problemen unterscheiden: Ein Kommunikationsfehler, eine unklare Information und eine mögliche unmittelbare Gefährdung einer unbeteiligten Person. Was sollte bei der Priorisierung entscheidend sein?",
+
     answers:[
       "Welches Problem am schnellsten gelöst werden kann.",
       "Welches Problem für die Beteiligten am unangenehmsten ist.",
       "Welche Situation die schwerwiegendsten unmittelbaren Folgen haben könnte.",
       "Welches Problem zuerst aufgefallen ist."
-    ], correct:[2]
+    ]
   },
+
+
   {
-    type:"single", points:3, category:"Urteilsvermögen",
-    question:"Eine Person verhält sich zunächst unauffällig. Später ändern sich einzelne Umstände, ohne dass bereits eine eindeutige Gefährdung erkennbar ist. Welche Reaktion ist am sinnvollsten?",
+    type:"single",
+    points:3,
+    category:"Urteilsvermögen",
+
+    question:
+      "Eine Person verhält sich zunächst unauffällig. Später ändern sich einzelne Umstände, ohne dass bereits eine eindeutige Gefährdung erkennbar ist. Welche Reaktion ist am sinnvollsten?",
+
     answers:[
       "Die ursprüngliche Einschätzung unverändert beibehalten.",
       "Die Veränderung berücksichtigen und prüfen, ob sie die bisherige Einschätzung beeinflusst.",
       "Ab diesem Zeitpunkt grundsätzlich von einer Gefährdung ausgehen.",
       "Die Veränderung ignorieren, solange niemand ausdrücklich eine Gefahr meldet."
-    ], correct:[1]
+    ]
   },
+
+
   {
-    type:"multi", points:5, category:"Reflexion und Verantwortung",
-    question:"Welche Aussagen sprechen für eine gute Entscheidungs- und Fehlerkultur?",
+    type:"multi",
+    points:5,
+    category:"Reflexion und Verantwortung",
+
     multiple:true,
+
+    question:
+      "Welche Aussagen sprechen für eine gute Entscheidungs- und Fehlerkultur?",
+
     answers:[
       "Eigene Fehlentscheidungen sollten sachlich analysiert werden.",
       "Aus Fehlern sollten konkrete Erkenntnisse für zukünftige Situationen gewonnen werden.",
       "Fehler sollten möglichst vermieden werden, indem Entscheidungen nachträglich nicht mehr hinterfragt werden.",
       "Auch erfolgreiche Ergebnisse können Anlass für eine kritische Nachbetrachtung sein."
-    ], correct:[0,1,3]
+    ]
   },
+
+
   {
-    type:"single", points:3, category:"Gesamtbeurteilung",
-    question:"Eine Lage ist unübersichtlich. Es gibt mehrere plausible Erklärungen, aber keine vollständige Gewissheit. Welche Haltung ist am geeignetsten?",
+    type:"single",
+    points:3,
+    category:"Gesamtbeurteilung",
+
+    question:
+      "Eine Lage ist unübersichtlich. Es gibt mehrere plausible Erklärungen, aber keine vollständige Gewissheit. Welche Haltung ist am geeignetsten?",
+
     answers:[
       "Eine klare Erklärung auswählen und daran festhalten.",
       "Unsicherheit akzeptieren, relevante Möglichkeiten berücksichtigen und die Einschätzung mit neuen Informationen fortlaufend anpassen.",
       "Nur bestätigte Informationen berücksichtigen und alle anderen vollständig ignorieren.",
       "Die Entscheidung ausschließlich danach treffen, was in ähnlichen Situationen bisher funktioniert hat."
-    ], correct:[1]
+    ]
   }
+
 ];
 
-const startScreen = document.getElementById("startScreen");
-const testScreen = document.getElementById("testScreen");
-const finishScreen = document.getElementById("finishScreen");
-const startButton = document.getElementById("startButton");
-const nextButton = document.getElementById("nextButton");
-const nameInput = document.getElementById("name");
-const dienstnummerInput = document.getElementById("dienstnummer");
-const questionCounter = document.getElementById("questionCounter");
-const progressBar = document.getElementById("progressBar");
-const timerEl = document.getElementById("timer");
-const categoryEl = document.getElementById("category");
-const questionEl = document.getElementById("question");
-const scenarioEl = document.getElementById("scenario");
-const answersEl = document.getElementById("answers");
-const openBox = document.getElementById("openBox");
-const openAnswer = document.getElementById("openAnswer");
+
+/* =========================================================
+   ELEMENTE
+   ========================================================= */
+
+const startScreen =
+  document.getElementById("startScreen");
+
+const testScreen =
+  document.getElementById("testScreen");
+
+const finishScreen =
+  document.getElementById("finishScreen");
+
+const startButton =
+  document.getElementById("startButton");
+
+const nextButton =
+  document.getElementById("nextButton");
+
+const nameInput =
+  document.getElementById("name");
+
+const dienstnummerInput =
+  document.getElementById("dienstnummer");
+
+const questionCounter =
+  document.getElementById("questionCounter");
+
+const progressBar =
+  document.getElementById("progressBar");
+
+const timerEl =
+  document.getElementById("timer");
+
+const categoryEl =
+  document.getElementById("category");
+
+const questionEl =
+  document.getElementById("question");
+
+const answersEl =
+  document.getElementById("answers");
+
+const openBox =
+  document.getElementById("openBox");
+
+const openAnswer =
+  document.getElementById("openAnswer");
+
+
+/* =========================================================
+   TEST-VARIABLEN
+   ========================================================= */
 
 let currentQuestion = 0;
-let remainingSeconds = 30 * 60;
+
+let remainingSeconds =
+  30 * 60;
+
 let timerInterval = null;
-let applicant = {name:"", dienstnummer:""};
+
+let applicant = {
+  name:"",
+  dienstnummer:""
+};
+
 let submittedAnswers = [];
 
-function normalize(arr){
-  return [...arr].sort((a,b)=>a-b);
-}
+
+/* =========================================================
+   FRAGE ANZEIGEN
+   ========================================================= */
 
 function showQuestion(){
-  const q = questions[currentQuestion];
 
-  questionCounter.textContent = `Frage ${currentQuestion + 1} von ${questions.length}`;
-  progressBar.style.width = `${((currentQuestion) / questions.length) * 100}%`;
-  categoryEl.textContent = `${q.category} • ${q.points} Punkte`;
-  questionEl.textContent = q.question;
-  scenarioEl.textContent = "";
+  const q =
+    questions[currentQuestion];
+
+
+  questionCounter.textContent =
+    `Frage ${currentQuestion + 1} von ${questions.length}`;
+
+
+  progressBar.style.width =
+    `${(currentQuestion / questions.length) * 100}%`;
+
+
+  categoryEl.textContent =
+    `${q.category} • ${q.points} Punkte`;
+
+
+  questionEl.textContent =
+    q.question;
+
+
   answersEl.innerHTML = "";
+
   openBox.classList.add("hidden");
+
   openAnswer.value = "";
 
+
+  /* OFFENE FRAGE */
+
   if(q.type === "open"){
+
     openBox.classList.remove("hidden");
-  }else{
-    if(q.multiple){
-      const note = document.createElement("div");
-      note.className = "multiple-note";
-      note.textContent = "Mehrere Antworten können richtig sein.";
-      answersEl.appendChild(note);
-    }
 
-    q.answers.forEach((text,index)=>{
-      const label = document.createElement("label");
-      label.className = "answer";
-
-      const input = document.createElement("input");
-      input.type = q.type === "multi" ? "checkbox" : "radio";
-      input.name = "answer";
-      input.value = index;
-
-      const span = document.createElement("span");
-      span.textContent = text;
-
-      label.appendChild(input);
-      label.appendChild(span);
-
-      label.addEventListener("click", (e)=>{
-        if(e.target.tagName !== "INPUT") input.click();
-        label.classList.toggle("selected", input.checked);
-      });
-
-      answersEl.appendChild(label);
-    });
   }
 
-  nextButton.textContent = currentQuestion === questions.length - 1 ? "Prüfung abgeben" : "Weiter";
+
+  /* MULTIPLE CHOICE */
+
+  else{
+
+    if(q.multiple){
+
+      const note =
+        document.createElement("div");
+
+      note.className =
+        "multiple-note";
+
+      note.textContent =
+        "Mehrere Antworten können richtig sein.";
+
+      answersEl.appendChild(note);
+
+    }
+
+
+    q.answers.forEach(
+      (text,index)=>{
+
+        const label =
+          document.createElement("label");
+
+        label.className =
+          "answer";
+
+
+        const input =
+          document.createElement("input");
+
+        input.type =
+          q.type === "multi"
+            ? "checkbox"
+            : "radio";
+
+        input.name =
+          "answer";
+
+        input.value =
+          index;
+
+
+        const span =
+          document.createElement("span");
+
+        span.textContent =
+          text;
+
+
+        label.appendChild(input);
+
+        label.appendChild(span);
+
+
+        label.addEventListener(
+          "click",
+          (e)=>{
+
+            if(e.target.tagName !== "INPUT"){
+              input.click();
+            }
+
+            label.classList.toggle(
+              "selected",
+              input.checked
+            );
+
+          }
+        );
+
+
+        answersEl.appendChild(label);
+
+      }
+    );
+
+  }
+
+
+  nextButton.textContent =
+    currentQuestion === questions.length - 1
+      ? "Prüfung abgeben"
+      : "Weiter";
+
 }
+
+
+/* =========================================================
+   ANTWORT EINSAMMELN
+   ========================================================= */
 
 function collectAnswer(){
-  const q = questions[currentQuestion];
+
+  const q =
+    questions[currentQuestion];
+
+
+  /* OFFENE FRAGE */
 
   if(q.type === "open"){
-    const value = openAnswer.value.trim();
+
+    const value =
+      openAnswer.value.trim();
+
+
     if(value.length < 20){
-      alert("Bitte beantworten Sie die Frage etwas ausführlicher.");
+
+      alert(
+        "Bitte beantworten Sie die Frage etwas ausführlicher."
+      );
+
       return null;
+
     }
+
+
     return value;
+
   }
 
-  const selected = [...document.querySelectorAll('input[name="answer"]:checked')]
-    .map(el=>Number(el.value));
+
+  /* MULTIPLE CHOICE */
+
+  const selected =
+    [
+      ...document.querySelectorAll(
+        'input[name="answer"]:checked'
+      )
+    ].map(
+      el => Number(el.value)
+    );
+
 
   if(selected.length === 0){
-    alert("Bitte wählen Sie mindestens eine Antwort aus.");
+
+    alert(
+      "Bitte wählen Sie mindestens eine Antwort aus."
+    );
+
     return null;
+
   }
 
-  return q.type === "multi" ? selected : selected[0];
+
+  if(q.type === "multi"){
+    return selected;
+  }
+
+
+  return selected[0];
+
 }
+
+
+/* =========================================================
+   TEST STARTEN
+   ========================================================= */
 
 function startTest(){
-  const name = nameInput.value.trim();
-  const dienstnummer = dienstnummerInput.value.trim();
+
+  const name =
+    nameInput.value.trim();
+
+  const dienstnummer =
+    dienstnummerInput.value.trim();
+
 
   if(!name || !dienstnummer){
-    alert("Bitte Vor- und Nachname sowie Dienstnummer eingeben.");
+
+    alert(
+      "Bitte Vor- und Nachname sowie Dienstnummer eingeben."
+    );
+
     return;
+
   }
 
-  applicant = {name, dienstnummer};
-  startScreen.classList.add("hidden");
-  testScreen.classList.remove("hidden");
-  showQuestion();
-  startTimer();
-}
 
-function startTimer(){
-  timerInterval = setInterval(()=>{
-    remainingSeconds--;
-
-    const min = Math.floor(remainingSeconds / 60).toString().padStart(2,"0");
-    const sec = (remainingSeconds % 60).toString().padStart(2,"0");
-    timerEl.textContent = `${min}:${sec}`;
-
-    if(remainingSeconds <= 120) timerEl.classList.add("warning");
-
-    if(remainingSeconds <= 0){
-      clearInterval(timerInterval);
-      submitTest(true);
-    }
-  },1000);
-}
-
-function submitTest(auto=false){
-  const q = questions[currentQuestion];
-
-  if(!auto){
-    const answer = collectAnswer();
-    if(answer === null) return;
-    submittedAnswers.push({
-      question: currentQuestion + 1,
-      points: q.points,
-      answer
-    });
-  }else{
-    // Bei automatischem Ablauf wird die aktuelle Antwort ebenfalls gespeichert,
-    // sofern bereits etwas eingetragen wurde.
-    let answer = null;
-
-    if(q.type === "open"){
-      answer = openAnswer.value.trim() || null;
-    }else{
-      const selected = [...document.querySelectorAll('input[name="answer"]:checked')]
-        .map(el=>Number(el.value));
-      answer = q.type === "multi" ? selected : (selected[0] ?? null);
-    }
-
-    submittedAnswers.push({
-      question: currentQuestion + 1,
-      points: q.points,
-      answer
-    });
-  }
-
-  if(currentQuestion < questions.length - 1 && !auto){
-    currentQuestion++;
-    showQuestion();
-    return;
-  }
-
-  clearInterval(timerInterval);
-
-  const submission = {
-    applicant,
-    submittedAt: new Date().toISOString(),
-    answers: submittedAnswers
+  applicant = {
+    name,
+    dienstnummer
   };
 
-  // Aktuell nur für die technische Testphase:
-  // Später wird diese Stelle durch die Datenbank-Anbindung ersetzt.
-  console.log("PRÜFUNG ABGEGEBEN:", submission);
 
-  testScreen.classList.add("hidden");
-  finishScreen.classList.remove("hidden");
+  startScreen.classList.add(
+    "hidden"
+  );
+
+  testScreen.classList.remove(
+    "hidden"
+  );
+
+
+  showQuestion();
+
+  startTimer();
+
 }
 
-startButton.addEventListener("click", startTest);
-nextButton.addEventListener("click", ()=>submitTest(false));
+
+/* =========================================================
+   TIMER
+   ========================================================= */
+
+function startTimer(){
+
+  timerInterval =
+    setInterval(
+      ()=>{
+      
+        remainingSeconds--;
+
+
+        const min =
+          Math.floor(
+            remainingSeconds / 60
+          )
+          .toString()
+          .padStart(2,"0");
+
+
+        const sec =
+          (remainingSeconds % 60)
+          .toString()
+          .padStart(2,"0");
+
+
+        timerEl.textContent =
+          `${min}:${sec}`;
+
+
+        if(remainingSeconds <= 120){
+
+          timerEl.classList.add(
+            "warning"
+          );
+
+        }
+
+
+        if(remainingSeconds <= 0){
+
+          clearInterval(
+            timerInterval
+          );
+
+          submitTest(true);
+
+        }
+
+      },
+      1000
+    );
+
+}
+
+
+/* =========================================================
+   PRÜFUNG ABSENDEN
+   ========================================================= */
+
+async function submitTest(auto=false){
+
+  const q =
+    questions[currentQuestion];
+
+
+  let answer;
+
+
+  /* MANUELLES WEITER */
+
+  if(!auto){
+
+    answer =
+      collectAnswer();
+
+
+    if(answer === null){
+      return;
+    }
+
+  }
+
+
+  /* AUTOMATISCHES ENDE DURCH TIMER */
+
+  else{
+
+    if(q.type === "open"){
+
+      answer =
+        openAnswer.value.trim() || null;
+
+    }
+
+    else{
+
+      const selected =
+        [
+          ...document.querySelectorAll(
+            'input[name="answer"]:checked'
+          )
+        ].map(
+          el => Number(el.value)
+        );
+
+
+      if(q.type === "multi"){
+
+        answer =
+          selected;
+
+      }
+
+      else{
+
+        answer =
+          selected.length > 0
+            ? selected[0]
+            : null;
+
+      }
+
+    }
+
+  }
+
+
+  submittedAnswers.push({
+
+    question:
+      currentQuestion + 1,
+
+    points:
+      q.points,
+
+    answer
+
+  });
+
+
+  /* NÄCHSTE FRAGE */
+
+  if(
+    currentQuestion <
+    questions.length - 1 &&
+    !auto
+  ){
+
+    nextButton.disabled =
+      false;
+
+    currentQuestion++;
+
+    showQuestion();
+
+    return;
+
+  }
+
+
+  /* TIMER STOPPEN */
+
+  clearInterval(
+    timerInterval
+  );
+
+
+  /* DATEN FÜR SUPABASE */
+
+  const submission = {
+
+    applicant,
+
+    submittedAt:
+      new Date().toISOString(),
+
+    answers:
+      submittedAnswers
+
+  };
+
+
+  try{
+
+    nextButton.disabled =
+      true;
+
+    nextButton.textContent =
+      "Wird abgegeben...";
+
+
+    const response =
+      await fetch(
+        `${SUPABASE_URL}/rest/v1/rpc/submit_exam`,
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "application/json",
+
+            "apikey":
+              SUPABASE_PUBLISHABLE_KEY,
+
+            "Authorization":
+              `Bearer ${SUPABASE_PUBLISHABLE_KEY}`
+          },
+
+          body:
+            JSON.stringify({
+
+              p_full_name:
+                submission.applicant.name,
+
+              p_dienstnummer:
+                submission.applicant.dienstnummer,
+
+              p_answers:
+                Object.fromEntries(
+
+                  submission.answers.map(
+                    item => [
+                      String(item.question),
+                      item.answer
+                    ]
+                  )
+
+                )
+
+            })
+        }
+      );
+
+
+    if(!response.ok){
+
+      const errorText =
+        await response.text();
+
+      throw new Error(
+        errorText ||
+        "Die Prüfung konnte nicht gespeichert werden."
+      );
+
+    }
+
+
+    testScreen.classList.add(
+      "hidden"
+    );
+
+    finishScreen.classList.remove(
+      "hidden"
+    );
+
+
+  }
+  catch(error){
+
+    console.error(
+      "Fehler bei der Abgabe:",
+      error
+    );
+
+
+    nextButton.disabled =
+      false;
+
+
+    nextButton.textContent =
+      "Prüfung abgeben";
+
+
+    alert(
+      "Die Prüfung konnte gerade nicht gespeichert werden.\n\n" +
+      "Bitte prüfen Sie Ihre Internetverbindung und versuchen Sie es erneut."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+startButton.addEventListener(
+  "click",
+  startTest
+);
+
+
+nextButton.addEventListener(
+  "click",
+  ()=>{
+    submitTest(false);
+  }
+);
+
 </script>
+
 </body>
 </html>
-'''
-
-path = Path("/mnt/data/index.html")
-path.write_text(html, encoding="utf-8")
-print(f"Erstellt: {path}")
-print("25 Fragen, 30 Minuten, 100 Punkte Gesamtgewichtung, Bestehensgrenze 75 %. Offene Fragen werden nicht automatisch bewertet.")
