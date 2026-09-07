@@ -34,8 +34,6 @@
             padding: 45px 20px;
         }
 
-        /* HEADER */
-
         .header {
             text-align: center;
 
@@ -76,8 +74,6 @@
             margin: 0 auto;
         }
 
-        /* CARDS */
-
         .card {
             background: #14171b;
 
@@ -88,7 +84,41 @@
             padding: 30px;
         }
 
-        /* START */
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #bbbbbb;
+
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 14px;
+
+            background: #0d0f12;
+
+            border: 1px solid #363a40;
+
+            border-radius: 8px;
+
+            color: white;
+
+            font-size: 16px;
+        }
+
+        input:focus {
+            outline: none;
+
+            border-color: #777777;
+        }
 
         .start-info {
             display: grid;
@@ -145,46 +175,6 @@
             margin-bottom: 25px;
         }
 
-        /* INPUT */
-
-        .input-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-
-            margin-bottom: 8px;
-
-            color: #bbbbbb;
-
-            font-size: 14px;
-        }
-
-        input {
-            width: 100%;
-
-            padding: 14px;
-
-            background: #0d0f12;
-
-            border: 1px solid #363a40;
-
-            border-radius: 8px;
-
-            color: white;
-
-            font-size: 16px;
-        }
-
-        input:focus {
-            outline: none;
-
-            border-color: #777777;
-        }
-
-        /* BUTTONS */
-
         button {
             font-family: inherit;
 
@@ -212,8 +202,6 @@
         .primary-button:hover {
             background: white;
         }
-
-        /* QUIZ */
 
         .hidden {
             display: none !important;
@@ -293,8 +281,6 @@
             margin-bottom: 28px;
         }
 
-        /* ANSWERS */
-
         .answers {
             display: flex;
 
@@ -331,12 +317,10 @@
             border-color: #dddddd;
         }
 
-        /* OPEN QUESTIONS */
-
         textarea {
             width: 100%;
 
-            min-height: 220px;
+            min-height: 230px;
 
             resize: vertical;
 
@@ -371,8 +355,6 @@
             margin-top: 8px;
         }
 
-        /* NEXT */
-
         .next-button {
             width: 100%;
 
@@ -396,8 +378,6 @@
 
             cursor: not-allowed;
         }
-
-        /* FINISH */
 
         .finish {
             text-align: center;
@@ -439,8 +419,6 @@
             margin: 0 auto 10px;
         }
 
-        /* MOBILE */
-
         @media (max-width: 650px) {
 
             .container {
@@ -470,9 +448,11 @@
 
                 gap: 7px;
             }
+
         }
 
     </style>
+
 </head>
 
 
@@ -482,9 +462,9 @@
 <div class="container">
 
 
-    <!-- ================================= -->
-    <!-- HEADER -->
-    <!-- ================================= -->
+    <!-- ==========================================
+         KOPFBEREICH
+         ========================================== -->
 
     <div class="header">
 
@@ -497,17 +477,17 @@
         </h1>
 
         <p class="subtitle">
-            Theoretische und situative Eignungsprüfung
-            für die Bewerbung beim Spezialeinsatzkommando.
+            Theoretische Eignungsprüfung für die Aufnahme
+            in das Spezialeinsatzkommando.
         </p>
 
     </div>
 
 
 
-    <!-- ================================= -->
-    <!-- STARTSEITE -->
-    <!-- ================================= -->
+    <!-- ==========================================
+         STARTSEITE
+         ========================================== -->
 
     <div
         id="startScreen"
@@ -524,6 +504,7 @@
                 id="name"
                 type="text"
                 placeholder="Max Mustermann"
+                autocomplete="name"
             >
 
         </div>
@@ -531,12 +512,12 @@
 
         <div class="input-group">
 
-            <label for="bewerberId">
-                Bewerber-ID / Dienstnummer
+            <label for="dienstnummer">
+                Dienstnummer
             </label>
 
             <input
-                id="bewerberId"
+                id="dienstnummer"
                 type="text"
                 placeholder="z. B. 2471"
             >
@@ -566,7 +547,7 @@
                 </div>
 
                 <div class="info-label">
-                    Minuten
+                    Bearbeitungszeit
                 </div>
 
             </div>
@@ -575,11 +556,11 @@
             <div class="info-box">
 
                 <div class="info-number">
-                    6,5/10
+                    SEK
                 </div>
 
                 <div class="info-label">
-                    Schwierigkeitsgrad
+                    Eignungsprüfung
                 </div>
 
             </div>
@@ -590,16 +571,23 @@
         <div class="notice">
 
             <strong>
-                Hinweis:
+                Hinweise zur Prüfung
             </strong>
-
-            Während des Tests werden keine Punkte,
-            Lösungen oder Hinweise angezeigt.
 
             <br><br>
 
-            Erst nach vollständiger Abgabe wird der Test
-            durch die zuständige Stelle ausgewertet.
+            Beantworten Sie sämtliche Fragen nach bestem
+            Wissen und Gewissen.
+
+            <br><br>
+
+            Während der Prüfung werden keine Punkte,
+            Lösungen oder Hinweise zur Bewertung angezeigt.
+
+            <br><br>
+
+            Die Bearbeitungszeit beträgt
+            <strong>30 Minuten</strong>.
 
         </div>
 
@@ -615,9 +603,9 @@
 
 
 
-    <!-- ================================= -->
-    <!-- TEST -->
-    <!-- ================================= -->
+    <!-- ==========================================
+         TESTBEREICH
+         ========================================== -->
 
     <div
         id="testScreen"
@@ -680,7 +668,7 @@
             <textarea
                 id="openAnswer"
                 class="hidden"
-                placeholder="Begründe deine Antwort möglichst nachvollziehbar..."
+                placeholder="Geben Sie Ihre Antwort möglichst nachvollziehbar und ausführlich an."
             ></textarea>
 
 
@@ -688,7 +676,7 @@
                 id="openHint"
                 class="open-hint hidden"
             >
-                Bitte beantworte die Frage nachvollziehbar.
+                Begründen Sie Ihre Entscheidung nachvollziehbar.
             </div>
 
 
@@ -708,9 +696,9 @@
 
 
 
-    <!-- ================================= -->
-    <!-- ABSCHLUSS -->
-    <!-- ================================= -->
+    <!-- ==========================================
+         ABSCHLUSS
+         ========================================== -->
 
     <div
         id="finishScreen"
@@ -724,22 +712,20 @@
             </div>
 
             <h2>
-                Test erfolgreich abgegeben
+                Prüfung abgegeben
             </h2>
 
             <p>
-                Deine Antworten wurden vollständig
-                erfasst.
+                Ihre Antworten wurden vollständig erfasst.
             </p>
 
             <p>
-                Die Auswertung erfolgt durch die
-                zuständige Stelle.
+                Die Auswertung erfolgt durch die zuständige Stelle.
             </p>
 
             <p>
-                Es werden keine Ergebnisse oder
-                Punktzahlen direkt nach dem Test angezeigt.
+                Das Ergebnis der Prüfung wird Ihnen zu einem
+                späteren Zeitpunkt mitgeteilt.
             </p>
 
         </div>
@@ -755,303 +741,451 @@
 
 
 /*
-==================================================
-SEK EIGNUNGSTEST
+=========================================================
+FRAGENKATALOG
 30 FRAGEN
 30 MINUTEN
-==================================================
+=========================================================
+
+24 Multiple-Choice-Fragen
+6 offene Fragen
+
+Die korrekten Antworten werden aktuell nur intern
+für die spätere automatische Auswertung hinterlegt.
+
+Während der Prüfung werden diese Informationen
+dem Bewerber nicht angezeigt.
 */
 
 
 const questions = [
 
 
-    /* =========================================
-       MULTIPLE CHOICE
-       ========================================= */
-
+    /* =================================================
+       1
+       ================================================= */
 
     {
-        category: "Allgemeines Verständnis",
+        category: "Allgemeine Eignung",
 
         question:
-            "Welche Aussage beschreibt die Aufgabe einer spezialisierten Einheit im RP am treffendsten?",
+            "Welche Eigenschaft ist für ein Mitglied einer Spezialeinheit besonders wichtig?",
 
         answers: [
 
-            "Sie übernimmt möglichst viele normale Streifenaufgaben.",
+            "Selbstständigkeit ohne Rücksicht auf andere",
 
-            "Sie wird eingesetzt, wenn eine Lage besondere Anforderungen an Ausbildung, Koordination oder Vorgehen stellt.",
+            "Ruhiges und kontrolliertes Handeln auch unter hoher Belastung",
 
-            "Sie hat grundsätzlich mehr Rechte als andere Polizeikräfte.",
+            "Möglichst aggressives Auftreten",
 
-            "Sie sollte bei jedem größeren Einsatz automatisch eingesetzt werden."
+            "Schnelle Entscheidungen unabhängig von der Lage"
 
         ],
 
         correct: 1
-
     },
 
 
-    {
-        category: "Entscheidungsfähigkeit",
-
-        question:
-            "Du erhältst während einer laufenden Lage mehrere widersprüchliche Informationen. Was ist die sinnvollste Reaktion?",
-
-        answers: [
-
-            "Die erste Information bleibt grundsätzlich maßgeblich.",
-
-            "Die widersprüchlichen Informationen werden ignoriert.",
-
-            "Die Lage wird neu bewertet und die wichtigsten Informationen werden geklärt.",
-
-            "Man entscheidet sich immer für die gefährlichste mögliche Variante."
-
-        ],
-
-        correct: 2
-
-    },
-
-
-    {
-        category: "RP-Verständnis",
-
-        question:
-            "Ein Verdächtiger provoziert dich während einer angespannten RP-Situation massiv. Welche Reaktion spricht am ehesten für gutes RP?",
-
-        answers: [
-
-            "Die Provokation persönlich nehmen und entsprechend reagieren.",
-
-            "Die Situation bewusst weiter eskalieren.",
-
-            "Professionell bleiben und die eigene Rolle nicht von Emotionen bestimmen lassen.",
-
-            "Den Verdächtigen ebenfalls provozieren."
-
-        ],
-
-        correct: 2
-
-    },
-
-
-    {
-        category: "Verhältnismäßigkeit",
-
-        question:
-            "Eine Maßnahme könnte zwar zum Ziel führen, wäre aber deutlich härter als notwendig. Was spricht grundsätzlich dagegen?",
-
-        answers: [
-
-            "Nichts, solange das gewünschte Ergebnis erreicht wird.",
-
-            "Der Grundsatz der Verhältnismäßigkeit.",
-
-            "Nur die Meinung des Verdächtigen.",
-
-            "Nur die Anzahl der anwesenden Beamten."
-
-        ],
-
-        correct: 1
-
-    },
-
-
-    {
-        category: "Kommunikation",
-
-        question:
-            "Warum ist klare Kommunikation während einer dynamischen Lage besonders wichtig?",
-
-        answers: [
-
-            "Damit möglichst viele Personen gleichzeitig sprechen können.",
-
-            "Damit jeder Beamte seine eigene Entscheidung treffen kann.",
-
-            "Damit Informationen schnell verstanden werden und Missverständnisse reduziert werden.",
-
-            "Damit der Funk möglichst lange besetzt bleibt."
-
-        ],
-
-        correct: 2
-
-    },
-
-
-    {
-        category: "Teamfähigkeit",
-
-        question:
-            "Ein Teammitglied macht während eines Einsatzes einen Fehler, der noch korrigiert werden kann. Wie verhältst du dich?",
-
-        answers: [
-
-            "Du machst ihn vor dem gesamten Team darauf aufmerksam.",
-
-            "Du ignorierst den Fehler.",
-
-            "Du greifst situationsgerecht ein und sprichst die Sache anschließend sachlich an.",
-
-            "Du verlangst sofort seinen Ausschluss aus dem Team."
-
-        ],
-
-        correct: 2
-
-    },
-
-
-    {
-        category: "Priorisierung",
-
-        question:
-            "Welche Information ist bei einer unübersichtlichen Einsatzlage typischerweise zuerst besonders relevant?",
-
-        answers: [
-
-            "Wer die Einsatzmeldung ursprünglich angenommen hat.",
-
-            "Welche unmittelbare Gefahr für Personen besteht.",
-
-            "Welche Einheit zuerst am Einsatzort war.",
-
-            "Welche Fahrzeuge vor Ort stehen."
-
-        ],
-
-        correct: 1
-
-    },
-
-
-    {
-        category: "Führung",
-
-        question:
-            "Was zeichnet einen guten Teamführer im RP am ehesten aus?",
-
-        answers: [
-
-            "Er entscheidet grundsätzlich alles alleine.",
-
-            "Er übernimmt Verantwortung, kommuniziert klar und berücksichtigt relevante Informationen.",
-
-            "Er gibt möglichst viele Befehle gleichzeitig.",
-
-            "Er vermeidet Entscheidungen, um keine Fehler zu machen."
-
-        ],
-
-        correct: 1
-
-    },
-
-
-    {
-        category: "Stressresistenz",
-
-        question:
-            "Du bist dir unter hohem Zeitdruck nicht sicher, ob du eine wichtige Information richtig verstanden hast. Was ist professionell?",
-
-        answers: [
-
-            "So tun, als wäre alles eindeutig.",
-
-            "Die Information selbstständig verändern.",
-
-            "Nachfragen beziehungsweise die Information verifizieren.",
-
-            "Eine beliebige Entscheidung treffen."
-
-        ],
-
-        correct: 2
-
-    },
-
+    /* =================================================
+       2
+       ================================================= */
 
     {
         category: "Lagebeurteilung",
 
         question:
-            "Eine zunächst ruhige Situation verändert sich plötzlich deutlich. Was ist wichtiger als das starre Festhalten am ursprünglichen Plan?",
+            "Du erhältst eine Einsatzmeldung, deren Angaben teilweise unvollständig sind. Welche Vorgehensweise ist am sinnvollsten?",
 
         answers: [
 
-            "Die eigene ursprüngliche Einschätzung zu verteidigen.",
+            "Die fehlenden Informationen spielen keine Rolle.",
 
-            "Die Geschwindigkeit um jeden Preis.",
+            "Die gefährlichste denkbare Variante wird automatisch als Tatsache angenommen.",
 
-            "Die Anpassung an die neue Lage.",
+            "Die verfügbaren Informationen werden bewertet und fehlende wichtige Informationen nach Möglichkeit ergänzt.",
 
-            "Die Meinung der unbeteiligten Personen."
+            "Die Einsatzmeldung wird grundsätzlich ignoriert, bis weitere Kräfte eintreffen."
 
         ],
 
         correct: 2
-
     },
 
 
+    /* =================================================
+       3
+       ================================================= */
+
     {
-        category: "RP-Verständnis",
+        category: "Verhältnismäßigkeit",
 
         question:
-            "Warum sollte ein SEK-Einsatz im RP nicht als reine 'Action um der Action willen' verstanden werden?",
+            "Eine Situation kann mit mehreren unterschiedlichen Maßnahmen unter Kontrolle gebracht werden. Welche Überlegung sollte dabei eine Rolle spielen?",
 
         answers: [
 
-            "Weil Spezialeinheiten im RP möglichst wenig machen sollten.",
+            "Es sollte grundsätzlich die härteste Maßnahme gewählt werden.",
 
-            "Weil glaubwürdiges RP auch Vorbereitung, Kommunikation und nachvollziehbare Entscheidungen beinhaltet.",
+            "Die Maßnahme sollte geeignet, erforderlich und angemessen sein.",
 
-            "Weil nur normale Polizeieinheiten aktiv handeln dürfen.",
+            "Die schnellste Maßnahme ist immer die richtige.",
 
-            "Weil Bewerber keine eigenen Entscheidungen treffen sollten."
+            "Die persönliche Einschätzung des Beamten ist ausreichend."
 
         ],
 
         correct: 1
-
     },
 
 
+    /* =================================================
+       4
+       ================================================= */
+
     {
-        category: "Teamfähigkeit",
+        category: "Kommunikation",
 
         question:
-            "Zwei Teammitglieder haben unterschiedliche Einschätzungen einer Lage. Was ist am sinnvollsten?",
+            "Welche Eigenschaft sollte eine wichtige Funkmeldung während eines laufenden Einsatzes möglichst besitzen?",
 
         answers: [
 
-            "Derjenige mit der lauteren Stimme entscheidet.",
+            "Sie sollte möglichst ausführlich und lang sein.",
 
-            "Beide ignorieren die Einschätzung des jeweils anderen.",
+            "Sie sollte möglichst emotional formuliert sein.",
 
-            "Relevante Argumente werden ausgetauscht und anschließend wird eine klare Entscheidung getroffen.",
+            "Sie sollte klar, kurz und eindeutig sein.",
 
-            "Der Konflikt wird während des Einsatzes ausgetragen."
+            "Sie sollte möglichst viele Vermutungen enthalten."
 
         ],
 
         correct: 2
-
     },
 
+
+    /* =================================================
+       5
+       ================================================= */
+
+    {
+        category: "Menschenkenntnis",
+
+        question:
+            "Eine Person verhält sich während einer Kontrolle nervös. Welche Schlussfolgerung ist allein aufgrund dieser Nervosität gerechtfertigt?",
+
+        answers: [
+
+            "Die Person ist eindeutig schuldig.",
+
+            "Die Person stellt definitiv eine Gefahr dar.",
+
+            "Aus der Nervosität allein lässt sich keine eindeutige Schuld oder Gefährlichkeit ableiten.",
+
+            "Die Person muss sofort festgenommen werden."
+
+        ],
+
+        correct: 2
+    },
+
+
+    /* =================================================
+       6
+       ================================================= */
+
+    {
+        category: "Teamarbeit",
+
+        question:
+            "Warum ist es wichtig, dass Mitglieder eines Einsatzteams ihre Informationen untereinander weitergeben?",
+
+        answers: [
+
+            "Damit möglichst viele Personen gleichzeitig Entscheidungen treffen.",
+
+            "Damit alle Beteiligten über relevante Veränderungen der Lage informiert sind.",
+
+            "Damit einzelne Beamte weniger Verantwortung tragen.",
+
+            "Damit der Einsatz möglichst lange dauert."
+
+        ],
+
+        correct: 1
+    },
+
+
+    /* =================================================
+       7
+       ================================================= */
+
+    {
+        category: "Entscheidungsfähigkeit",
+
+        question:
+            "Du musst eine Entscheidung treffen, obwohl nicht sämtliche Informationen vorliegen. Welche Aussage trifft am ehesten zu?",
+
+        answers: [
+
+            "Ohne vollständige Informationen darf niemals entschieden werden.",
+
+            "Eine Entscheidung sollte auf Grundlage der verfügbaren Informationen und der aktuellen Gefahrenlage getroffen werden.",
+
+            "Man sollte grundsätzlich die Meinung der Mehrheit übernehmen.",
+
+            "Man sollte warten, bis jemand anderes die Verantwortung übernimmt."
+
+        ],
+
+        correct: 1
+    },
+
+
+    /* =================================================
+       8
+       ================================================= */
+
+    {
+        category: "Eigensicherung",
+
+        question:
+            "Warum sollte auch eine scheinbar ruhige Einsatzlage aufmerksam beobachtet werden?",
+
+        answers: [
+
+            "Weil eine Lage jederzeit eine andere Entwicklung nehmen kann.",
+
+            "Damit der Einsatz unnötig verlängert wird.",
+
+            "Damit möglichst viele Maßnahmen durchgeführt werden können.",
+
+            "Weil grundsätzlich jeder Bürger als gefährlich angesehen werden muss."
+
+        ],
+
+        correct: 0
+    },
+
+
+    /* =================================================
+       9
+       ================================================= */
+
+    {
+        category: "Führung",
+
+        question:
+            "Welche Eigenschaft zeichnet eine gute Führungskraft während einer dynamischen Lage am ehesten aus?",
+
+        answers: [
+
+            "Sie trifft jede Entscheidung alleine.",
+
+            "Sie bleibt ruhig, setzt Prioritäten und kommuniziert klare Entscheidungen.",
+
+            "Sie vermeidet Entscheidungen möglichst lange.",
+
+            "Sie überlässt Entscheidungen vollständig den anderen Teammitgliedern."
+
+        ],
+
+        correct: 1
+    },
+
+
+    /* =================================================
+       10
+       ================================================= */
+
+    {
+        category: "Stressresistenz",
+
+        question:
+            "Du stellst während eines Einsatzes fest, dass du eine wichtige Information möglicherweise falsch verstanden hast. Was ist sinnvoll?",
+
+        answers: [
+
+            "Die Information ignorieren.",
+
+            "So handeln, als wäre die Information eindeutig.",
+
+            "Die Information möglichst schnell überprüfen oder nachfragen.",
+
+            "Die Information selbstständig verändern."
+
+        ],
+
+        correct: 2
+    },
+
+
+    /* =================================================
+       11
+       ================================================= */
+
+    {
+        category: "Lagebeurteilung",
+
+        question:
+            "Eine Person verhält sich zunächst kooperativ. Wenig später verändert sich ihr Verhalten deutlich. Was ist die sinnvollste Reaktion?",
+
+        answers: [
+
+            "Die ursprüngliche Einschätzung bleibt immer bestehen.",
+
+            "Die Veränderung sollte berücksichtigt und die Lage neu bewertet werden.",
+
+            "Die Person ist automatisch schuldig.",
+
+            "Die Veränderung wird ignoriert, solange niemand verletzt wurde."
+
+        ],
+
+        correct: 1
+    },
+
+
+    /* =================================================
+       12
+       ================================================= */
+
+    {
+        category: "Priorisierung",
+
+        question:
+            "Welche Information sollte bei einer unübersichtlichen Einsatzlage besonders hohe Priorität besitzen?",
+
+        answers: [
+
+            "Wer die Einsatzmeldung zuerst erhalten hat.",
+
+            "Welche unmittelbare Gefahr für Personen besteht.",
+
+            "Welche Einheit die meisten Beamten stellt.",
+
+            "Wie lange der Einsatz bereits läuft."
+
+        ],
+
+        correct: 1
+    },
+
+
+    /* =================================================
+       13
+       ================================================= */
+
+    {
+        category: "Rechtsverständnis",
+
+        question:
+            "Was bedeutet es grundsätzlich, wenn eine polizeiliche Maßnahme verhältnismäßig sein muss?",
+
+        answers: [
+
+            "Die Maßnahme muss geeignet, erforderlich und angemessen sein.",
+
+            "Die Maßnahme muss immer möglichst schnell erfolgen.",
+
+            "Die Maßnahme muss möglichst streng sein.",
+
+            "Die Maßnahme muss immer zum Erfolg führen."
+
+        ],
+
+        correct: 0
+    },
+
+
+    /* =================================================
+       14
+       ================================================= */
+
+    {
+        category: "Teamarbeit",
+
+        question:
+            "Ein Teammitglied weist dich während eines Einsatzes auf einen möglichen Fehler in deiner Einschätzung hin. Wie solltest du damit umgehen?",
+
+        answers: [
+
+            "Die Kritik grundsätzlich ignorieren.",
+
+            "Die Person wegen der Kritik zurechtweisen.",
+
+            "Die Information prüfen und gegebenenfalls die eigene Einschätzung anpassen.",
+
+            "Die Entscheidung sofort an das Teammitglied übertragen."
+
+        ],
+
+        correct: 2
+    },
+
+
+    /* =================================================
+       15
+       ================================================= */
+
+    {
+        category: "Kommunikation",
+
+        question:
+            "Warum können unklare oder widersprüchliche Funksprüche während eines Einsatzes problematisch sein?",
+
+        answers: [
+
+            "Sie können zu Missverständnissen und falschen Entscheidungen führen.",
+
+            "Sie verlängern ausschließlich die Einsatzdauer.",
+
+            "Sie sind nur für die Führungsebene problematisch.",
+
+            "Sie haben keine besondere Bedeutung."
+
+        ],
+
+        correct: 0
+    },
+
+
+    /* =================================================
+       16
+       ================================================= */
+
+    {
+        category: "Menschenkenntnis",
+
+        question:
+            "Ein Tatverdächtiger wirkt sehr selbstsicher und ruhig. Welche Schlussfolgerung ist daraus allein zulässig?",
+
+        answers: [
+
+            "Er ist ungefährlich.",
+
+            "Er ist unschuldig.",
+
+            "Er ist besonders gefährlich.",
+
+            "Keine der genannten eindeutigen Schlussfolgerungen."
+
+        ],
+
+        correct: 3
+    },
+
+
+    /* =================================================
+       17
+       ================================================= */
 
     {
         category: "Verantwortung",
 
         question:
-            "Nach einem Einsatz stellst du fest, dass deine eigene Entscheidung nicht optimal war. Welche Haltung ist professionell?",
+            "Nach einem Einsatz stellst du fest, dass eine deiner Entscheidungen nicht optimal war. Was spricht für professionelles Verhalten?",
 
         answers: [
 
@@ -1059,131 +1193,45 @@ const questions = [
 
             "Den Fehler verschweigen.",
 
-            "Die Entscheidung reflektieren und daraus lernen.",
+            "Die Entscheidung sachlich analysieren und aus dem Fehler lernen.",
 
-            "Die Situation nachträglich schönreden."
-
-        ],
-
-        correct: 2
-
-    },
-
-
-    {
-        category: "Kommunikation",
-
-        question:
-            "Welche Funkmeldung ist während einer hektischen Situation grundsätzlich am geeignetsten?",
-
-        answers: [
-
-            "Eine möglichst lange Erklärung mit allen Nebendetails.",
-
-            "Eine kurze, relevante und eindeutig formulierte Information.",
-
-            "Mehrere Informationen gleichzeitig und ohne Reihenfolge.",
-
-            "Eine emotionale Einschätzung der beteiligten Personen."
-
-        ],
-
-        correct: 1
-
-    },
-
-
-    {
-        category: "Situationsbewusstsein",
-
-        question:
-            "Du beobachtest etwas, das nicht zu deiner bisherigen Einschätzung passt. Was solltest du vermeiden?",
-
-        answers: [
-
-            "Die Beobachtung ernst zu nehmen.",
-
-            "Die Lage neu zu bewerten.",
-
-            "Ungeprüft an der bisherigen Annahme festzuhalten.",
-
-            "Die neue Information an dein Team weiterzugeben."
+            "Die Entscheidung nachträglich grundsätzlich rechtfertigen."
 
         ],
 
         correct: 2
-
     },
 
 
+    /* =================================================
+       18
+       ================================================= */
+
     {
-        category: "Entscheidungsfähigkeit",
+        category: "Lageentwicklung",
 
         question:
-            "Was ist bei einer schwierigen Entscheidung grundsätzlich besser?",
+            "Während einer Einsatzlage tritt plötzlich eine neue Gefahr auf. Was sollte bei der weiteren Entscheidungsfindung berücksichtigt werden?",
 
         answers: [
 
-            "Eine nachvollziehbare Entscheidung auf Basis der verfügbaren Informationen.",
+            "Nur der ursprüngliche Einsatzplan.",
 
-            "Eine zufällige Entscheidung.",
+            "Die neue Gefahr und ihre Auswirkungen auf die Gesamtlage.",
 
-            "Gar keine Entscheidung, obwohl Handeln erforderlich ist.",
+            "Nur die Meinung des ranghöchsten Beamten.",
 
-            "Eine Entscheidung ausschließlich nach persönlicher Sympathie."
-
-        ],
-
-        correct: 0
-
-    },
-
-
-    {
-        category: "Konfliktfähigkeit",
-
-        question:
-            "Ein Kollege kritisiert deine Entscheidung sachlich. Wie solltest du damit umgehen?",
-
-        answers: [
-
-            "Sachliche Kritik grundsätzlich als persönlichen Angriff verstehen.",
-
-            "Die Kritik prüfen und gegebenenfalls daraus lernen.",
-
-            "Den Kollegen sofort aus dem Team entfernen lassen.",
-
-            "Die Kritik ignorieren."
+            "Die ursprüngliche Lage darf nicht mehr verändert werden."
 
         ],
 
         correct: 1
-
     },
 
 
-    {
-        category: "Priorisierung",
-
-        question:
-            "Welche Situation verlangt grundsätzlich eine besonders schnelle Neubewertung?",
-
-        answers: [
-
-            "Eine Änderung der Wetterlage.",
-
-            "Eine plötzlich auftretende unmittelbare Gefahr für Personen.",
-
-            "Ein falsch geparktes Fahrzeug außerhalb der Einsatzlage.",
-
-            "Eine Diskussion über Dienstkleidung."
-
-        ],
-
-        correct: 1
-
-    },
-
+    /* =================================================
+       19
+       ================================================= */
 
     {
         category: "Disziplin",
@@ -1193,180 +1241,237 @@ const questions = [
 
         answers: [
 
-            "Blind zu gehorchen und niemals nachzudenken.",
+            "Blind zu gehorchen, ohne eigene Überlegungen anzustellen.",
 
-            "Vereinbarte Abläufe einzuhalten, Verantwortung zu übernehmen und kontrolliert zu handeln.",
+            "Vereinbarte Abläufe einzuhalten und auch unter Druck kontrolliert zu handeln.",
 
-            "Keine eigene Meinung zu besitzen.",
+            "Eigene Entscheidungen niemals zu hinterfragen.",
 
-            "Andere Personen grundsätzlich zu überstimmen."
-
-        ],
-
-        correct: 1
-
-    },
-
-
-    {
-        category: "Führung",
-
-        question:
-            "Wann ist es sinnvoll, eine Entscheidung eines Vorgesetzten anzusprechen?",
-
-        answers: [
-
-            "Immer lautstark vor allen Beteiligten.",
-
-            "Wenn relevante Bedenken bestehen und es die Situation zulässt, sachlich und professionell.",
-
-            "Nur wenn man die Person persönlich nicht mag.",
-
-            "Niemals."
+            "Sich gegenüber anderen Beamten durchzusetzen."
 
         ],
 
         correct: 1
-
     },
 
 
-    {
-        category: "Lagebeurteilung",
-
-        question:
-            "Was spricht im RP am ehesten für gutes taktisches Denkvermögen?",
-
-        answers: [
-
-            "Möglichst aggressiv aufzutreten.",
-
-            "Mehrere mögliche Entwicklungen mitzudenken und Prioritäten zu erkennen.",
-
-            "Immer dieselbe Vorgehensweise zu verwenden.",
-
-            "Möglichst viele Personen gleichzeitig einzusetzen."
-
-        ],
-
-        correct: 1
-
-    },
-
-
-    {
-        category: "Eigensicherung",
-
-        question:
-            "Warum sollte ein Team auch bei einer scheinbar kontrollierten Situation aufmerksam bleiben?",
-
-        answers: [
-
-            "Weil jede Situation völlig eskalieren muss.",
-
-            "Weil sich die Lage jederzeit verändern kann und neue Informationen berücksichtigt werden müssen.",
-
-            "Damit der Einsatz möglichst lange dauert.",
-
-            "Damit möglichst viele Personen beteiligt werden."
-
-        ],
-
-        correct: 1
-
-    },
-
-
-    /* =========================================
-       OFFENE FALLFRAGEN
-       ========================================= */
-
-
-    {
-        category: "Fallbeispiel",
-
-        question:
-            "Du wirst zu einer angespannten Lage gerufen. Die Informationen aus der ersten Meldung sind unvollständig und teilweise widersprüchlich. Welche Informationen würdest du zuerst klären und warum?",
-
-        open: true
-
-    },
-
-
-    {
-        category: "Fallbeispiel",
-
-        question:
-            "Du bist Teil eines Teams und bemerkst, dass die Kommunikation während einer dynamischen Situation zunehmend unübersichtlich wird. Wie würdest du reagieren, ohne die Situation unnötig weiter zu verschärfen?",
-
-        open: true
-
-    },
-
-
-    {
-        category: "Fallbeispiel",
-
-        question:
-            "Ein Kollege möchte in einer Situation eine deutlich härtere Maßnahme ergreifen, während du die Lage für weniger kritisch hältst. Wie gehst du mit dieser unterschiedlichen Einschätzung um?",
-
-        open: true
-
-    },
-
-
-    {
-        category: "Fallbeispiel",
-
-        question:
-            "Nach einer abgeschlossenen Einsatzlage stellt sich heraus, dass eine wichtige Information innerhalb des Teams falsch weitergegeben wurde. Wie sollte ein gutes Team deiner Meinung nach damit umgehen?",
-
-        open: true
-
-    },
-
+    /* =================================================
+       20
+       ================================================= */
 
     {
         category: "Entscheidungsfähigkeit",
 
         question:
-            "Du musst innerhalb kurzer Zeit eine Entscheidung treffen, verfügst aber nicht über alle Informationen. Wie gehst du mit dieser Unsicherheit um?",
+            "Zwei mögliche Vorgehensweisen erscheinen grundsätzlich geeignet. Was sollte bei der Entscheidung unter anderem berücksichtigt werden?",
 
-        open: true
+        answers: [
 
+            "Welche Vorgehensweise die geringsten unnötigen Risiken verursacht.",
+
+            "Welche Vorgehensweise am spektakulärsten ist.",
+
+            "Welche Vorgehensweise am aggressivsten wirkt.",
+
+            "Welche Vorgehensweise den Beamten persönlich besser gefällt."
+
+        ],
+
+        correct: 0
     },
 
+
+    /* =================================================
+       21
+       ================================================= */
+
+    {
+        category: "Führung",
+
+        question:
+            "Ein Einsatzleiter erhält von einem Teammitglied eine wichtige neue Information. Was sollte eine gute Führungskraft damit tun?",
+
+        answers: [
+
+            "Die Information grundsätzlich ignorieren.",
+
+            "Die Information in die weitere Lagebewertung einbeziehen.",
+
+            "Die Information erst nach Ende des Einsatzes berücksichtigen.",
+
+            "Die Information nur dann beachten, wenn sie der eigenen Meinung entspricht."
+
+        ],
+
+        correct: 1
+    },
+
+
+    /* =================================================
+       22
+       ================================================= */
+
+    {
+        category: "Priorisierung",
+
+        question:
+            "Welche Situation erfordert grundsätzlich die höchste Aufmerksamkeit?",
+
+        answers: [
+
+            "Eine verbale Auseinandersetzung ohne erkennbare Gefahr.",
+
+            "Eine unmittelbare und konkrete Gefahr für das Leben einer Person.",
+
+            "Eine kleinere Ordnungswidrigkeit außerhalb der aktuellen Einsatzlage.",
+
+            "Eine Diskussion zwischen zwei Beamten über die weitere Vorgehensweise."
+
+        ],
+
+        correct: 1
+    },
+
+
+    /* =================================================
+       23
+       ================================================= */
 
     {
         category: "Lagebeurteilung",
 
         question:
-            "Eine Person verhält sich zunächst kooperativ. Im weiteren Verlauf verändert sich die Situation deutlich. Welche Faktoren würdest du bei deiner neuen Einschätzung berücksichtigen?",
+            "Welche Aussage über Einsatzentscheidungen trifft am ehesten zu?",
 
-        open: true
+        answers: [
 
+            "Eine einmal getroffene Entscheidung darf niemals verändert werden.",
+
+            "Eine Entscheidung sollte an neue relevante Erkenntnisse angepasst werden können.",
+
+            "Eine Entscheidung ist immer richtig, wenn sie von einem Vorgesetzten getroffen wurde.",
+
+            "Eine Entscheidung sollte möglichst schnell getroffen werden, unabhängig von den Informationen."
+
+        ],
+
+        correct: 1
     },
 
+
+    /* =================================================
+       24
+       ================================================= */
+
+    {
+        category: "Allgemeine Eignung",
+
+        question:
+            "Welche Kombination beschreibt ein geeignetes Verhalten in einer anspruchsvollen Einsatzlage am besten?",
+
+        answers: [
+
+            "Aggressivität, Selbstständigkeit und Risikobereitschaft.",
+
+            "Ruhe, Aufmerksamkeit, Kommunikation und nachvollziehbare Entscheidungen.",
+
+            "Schnelligkeit, Härte und möglichst wenig Kommunikation.",
+
+            "Dominanz, Durchsetzungsfähigkeit und Eigenständigkeit ohne Rücksprache."
+
+        ],
+
+        correct: 1
+    },
+
+
+    /* =================================================
+       25
+       OFFENE FRAGE
+       ================================================= */
+
+    {
+        category: "Fallbeurteilung",
+
+        question:
+            "Du wirst zu einer angespannten Einsatzlage gerufen. Die erste Meldung enthält nur wenige Informationen und mehrere Punkte sind unklar. Welche Informationen würdest du vor einer weiteren Entscheidung möglichst klären? Begründe deine Priorisierung.",
+
+        open: true
+    },
+
+
+    /* =================================================
+       26
+       OFFENE FRAGE
+       ================================================= */
+
+    {
+        category: "Fallbeurteilung",
+
+        question:
+            "Während einer Einsatzlage bemerkst du, dass zwei Mitglieder deines Teams von unterschiedlichen Voraussetzungen ausgehen und dadurch widersprüchliche Entscheidungen treffen könnten. Wie würdest du mit der Situation umgehen?",
+
+        open: true
+    },
+
+
+    /* =================================================
+       27
+       OFFENE FRAGE
+       ================================================= */
+
+    {
+        category: "Entscheidungsfähigkeit",
+
+        question:
+            "Du musst eine Entscheidung treffen, obwohl dir nicht sämtliche Informationen vorliegen. Beschreibe, wie du in dieser Situation zu einer möglichst fundierten Entscheidung kommen würdest.",
+
+        open: true
+    },
+
+
+    /* =================================================
+       28
+       OFFENE FRAGE
+       ================================================= */
+
+    {
+        category: "Verhältnismäßigkeit",
+
+        question:
+            "Du bist der Meinung, dass ein Kollege eine deutlich härtere Maßnahme ergreifen möchte, als die aktuelle Lage deiner Einschätzung nach erfordert. Wie würdest du damit umgehen? Begründe dein Vorgehen.",
+
+        open: true
+    },
+
+
+    /* =================================================
+       29
+       OFFENE FRAGE
+       ================================================= */
+
+    {
+        category: "Selbstreflexion",
+
+        question:
+            "Nach einem schwierigen Einsatz stellst du fest, dass eine deiner Entscheidungen möglicherweise nicht optimal war. Wie würdest du die Situation im Nachhinein aufarbeiten und was würdest du daraus für zukünftige Einsätze mitnehmen?",
+
+        open: true
+    },
+
+
+    /* =================================================
+       30
+       OFFENE FRAGE
+       ================================================= */
 
     {
         category: "Motivation",
 
         question:
-            "Warum möchtest du dem SEK beitreten? Welche Eigenschaften bringst du deiner Meinung nach dafür mit und welche Eigenschaften möchtest du noch verbessern?",
+            "Warum möchtest du Teil des Spezialeinsatzkommandos werden? Welche persönlichen Eigenschaften bringst du deiner Meinung nach für diese Aufgabe mit und in welchen Bereichen möchtest du dich noch weiterentwickeln?",
 
         open: true
-
-    },
-
-
-    {
-        category: "Selbsteinschätzung",
-
-        question:
-            "Nenne eine persönliche Stärke und eine persönliche Schwäche von dir, die in einem SEK-Team relevant sein könnten. Erkläre kurz, wie du damit umgehen würdest.",
-
-        open: true
-
     }
 
 ];
@@ -1374,9 +1479,9 @@ const questions = [
 
 
 /*
-==================================================
+=========================================================
 VARIABLEN
-==================================================
+=========================================================
 */
 
 
@@ -1393,9 +1498,9 @@ let timerInterval = null;
 
 
 /*
-==================================================
+=========================================================
 ELEMENTE
-==================================================
+=========================================================
 */
 
 
@@ -1453,9 +1558,9 @@ const openHint =
 
 
 /*
-==================================================
+=========================================================
 TEST STARTEN
-==================================================
+=========================================================
 */
 
 
@@ -1470,17 +1575,17 @@ startButton.addEventListener(
                 .trim();
 
 
-        const bewerberId =
+        const dienstnummer =
             document
-                .getElementById("bewerberId")
+                .getElementById("dienstnummer")
                 .value
                 .trim();
 
 
-        if (!name || !bewerberId) {
+        if (!name || !dienstnummer) {
 
             alert(
-                "Bitte Vor- und Nachnamen sowie die Bewerber-ID eingeben."
+                "Bitte Vor- und Nachnamen sowie die Dienstnummer eingeben."
             );
 
             return;
@@ -1516,9 +1621,9 @@ startButton.addEventListener(
 
 
 /*
-==================================================
+=========================================================
 FRAGE ANZEIGEN
-==================================================
+=========================================================
 */
 
 
@@ -1577,9 +1682,9 @@ function showQuestion() {
 
 
     /*
-    ------------------------------------------
+    =========================================
     OFFENE FRAGE
-    ------------------------------------------
+    =========================================
     */
 
 
@@ -1606,9 +1711,9 @@ function showQuestion() {
 
 
     /*
-    ------------------------------------------
+    =========================================
     MULTIPLE CHOICE
-    ------------------------------------------
+    =========================================
     */
 
 
@@ -1686,9 +1791,9 @@ function showQuestion() {
 
 
 /*
-==================================================
-OFFENE FRAGE PRÜFEN
-==================================================
+=========================================================
+OFFENE ANTWORT PRÜFEN
+=========================================================
 */
 
 
@@ -1699,9 +1804,7 @@ function checkOpenAnswer() {
 
 
     /*
-    Mindestens 30 Zeichen,
-    damit nicht einfach ein einzelnes
-    Wort eingegeben wird.
+    Mindestens 30 Zeichen.
     */
 
 
@@ -1722,9 +1825,9 @@ function checkOpenAnswer() {
 
 
 /*
-==================================================
+=========================================================
 NÄCHSTE FRAGE
-==================================================
+=========================================================
 */
 
 
@@ -1737,9 +1840,9 @@ nextButton.addEventListener(
 
 
         /*
-        --------------------------------------
-        MULTIPLE CHOICE SPEICHERN
-        --------------------------------------
+        =====================================
+        MULTIPLE CHOICE
+        =====================================
         */
 
 
@@ -1769,9 +1872,9 @@ nextButton.addEventListener(
 
 
         /*
-        --------------------------------------
-        OFFENE FRAGE SPEICHERN
-        --------------------------------------
+        =====================================
+        OFFENE FRAGE
+        =====================================
         */
 
 
@@ -1804,14 +1907,14 @@ nextButton.addEventListener(
         }
 
 
-        /*
-        --------------------------------------
-        NÄCHSTE FRAGE
-        --------------------------------------
-        */
-
-
         currentQuestion++;
+
+
+        /*
+        =====================================
+        TEST BEENDET
+        =====================================
+        */
 
 
         if (
@@ -1835,9 +1938,9 @@ nextButton.addEventListener(
 
 
 /*
-==================================================
+=========================================================
 TIMER
-==================================================
+=========================================================
 */
 
 
@@ -1912,9 +2015,9 @@ function updateTimer() {
 
 
 /*
-==================================================
+=========================================================
 TEST BEENDEN
-==================================================
+=========================================================
 */
 
 
@@ -1936,31 +2039,33 @@ function finishTest() {
 
 
     /*
-    ------------------------------------------
-    AKTUELLER STAND
-    ------------------------------------------
+    =========================================
+    SPÄTER:
+    ÜBERMITTLUNG AN DIE DATENBANK
+    =========================================
 
-    Die Antworten werden momentan nur
-    innerhalb dieser Testseite gehalten.
+    Hier werden wir später die Antworten
+    tatsächlich an Supabase übermitteln.
 
-    Im nächsten Schritt verbinden wir
-    das mit Supabase.
+    Die automatische Auswertung der
+    Multiple-Choice-Fragen findet dann
+    serverseitig statt.
 
-    Dann werden die Antworten wirklich
-    gespeichert und du kannst sie im
-    Admin-Bereich auswerten.
-    ------------------------------------------
+    Die offenen Antworten bleiben für
+    die manuelle Bewertung verfügbar.
+    =========================================
     */
 
 
     console.log(
-        "Test abgegeben:",
+        "Prüfung abgegeben:",
         submittedAnswers
     );
 
 }
 
 </script>
+
 
 </body>
 </html>
