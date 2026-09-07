@@ -14,6 +14,8 @@
   --text:#eef1f3;
   --muted:#8e98a3;
   --accent:#d7dde2;
+  --red:#e05252;
+  --red-dark:#6f2f2f;
 }
 
 *{
@@ -132,7 +134,41 @@ h1{
   color:#c8ced3;
   font-size:13px;
   line-height:1.55;
-  margin-bottom:22px;
+  margin-bottom:16px;
+}
+
+/* =========================
+   ACHTUNG-HINWEIS
+   ========================= */
+
+.warning{
+  border:1px solid var(--red-dark);
+  border-left:5px solid var(--red);
+  padding:16px 18px;
+  background:rgba(180,45,45,.10);
+  border-radius:9px;
+  margin-bottom:24px;
+  line-height:1.6;
+}
+
+.warning-title{
+  color:#ff5c5c;
+  font-size:17px;
+  font-weight:900;
+  letter-spacing:1.5px;
+  margin-bottom:7px;
+}
+
+.warning-text{
+  color:#d9b8b8;
+  font-size:13px;
+}
+
+.warning-important{
+  display:block;
+  color:#ff6666;
+  font-weight:800;
+  margin-top:6px;
 }
 
 label{
@@ -278,8 +314,10 @@ button:disabled{
 }
 
 .answer input{
-  width:auto;
-  margin-top:3px;
+  width:18px;
+  height:18px;
+  margin:1px 0 0 0;
+  flex:0 0 18px;
   accent-color:#c8cdd1;
 }
 
@@ -438,6 +476,28 @@ textarea{
     </div>
 
 
+    <!-- ACHTUNG -->
+
+    <div class="warning">
+
+      <div class="warning-title">
+        ACHTUNG
+      </div>
+
+      <div class="warning-text">
+
+        Jede Frage kann nur einmal beantwortet werden.
+
+        <span class="warning-important">
+          Nach dem Klick auf „Weiter“ besteht keine Möglichkeit mehr,
+          zur vorherigen Frage zurückzukehren oder die Antwort zu ändern.
+        </span>
+
+      </div>
+
+    </div>
+
+
     <div class="form-row">
 
       <div>
@@ -510,10 +570,12 @@ textarea{
 
 
     <div class="progress">
+
       <div
         id="progressBar"
         class="progress-bar"
       ></div>
+
     </div>
 
 
@@ -1116,16 +1178,12 @@ function showQuestion(){
   openAnswer.value = "";
 
 
-  /* OFFENE FRAGE */
-
   if(q.type === "open"){
 
     openBox.classList.remove("hidden");
 
   }
 
-
-  /* MULTIPLE CHOICE */
 
   else{
 
@@ -1182,6 +1240,17 @@ function showQuestion(){
         label.appendChild(span);
 
 
+        input.addEventListener(
+          "change",
+          ()=>{
+            label.classList.toggle(
+              "selected",
+              input.checked
+            );
+          }
+        );
+
+
         label.addEventListener(
           "click",
           (e)=>{
@@ -1189,11 +1258,6 @@ function showQuestion(){
             if(e.target.tagName !== "INPUT"){
               input.click();
             }
-
-            label.classList.toggle(
-              "selected",
-              input.checked
-            );
 
           }
         );
@@ -1225,8 +1289,6 @@ function collectAnswer(){
     questions[currentQuestion];
 
 
-  /* OFFENE FRAGE */
-
   if(q.type === "open"){
 
     const value =
@@ -1248,8 +1310,6 @@ function collectAnswer(){
 
   }
 
-
-  /* MULTIPLE CHOICE */
 
   const selected =
     [
@@ -1337,7 +1397,7 @@ function startTimer(){
   timerInterval =
     setInterval(
       ()=>{
-      
+
         remainingSeconds--;
 
 
@@ -1398,8 +1458,6 @@ async function submitTest(auto=false){
   let answer;
 
 
-  /* MANUELLES WEITER */
-
   if(!auto){
 
     answer =
@@ -1412,8 +1470,6 @@ async function submitTest(auto=false){
 
   }
 
-
-  /* AUTOMATISCHES ENDE DURCH TIMER */
 
   else{
 
@@ -1470,8 +1526,6 @@ async function submitTest(auto=false){
   });
 
 
-  /* NÄCHSTE FRAGE */
-
   if(
     currentQuestion <
     questions.length - 1 &&
@@ -1490,14 +1544,10 @@ async function submitTest(auto=false){
   }
 
 
-  /* TIMER STOPPEN */
-
   clearInterval(
     timerInterval
   );
 
-
-  /* DATEN FÜR SUPABASE */
 
   const submission = {
 
@@ -1587,6 +1637,7 @@ async function submitTest(auto=false){
 
 
   }
+
   catch(error){
 
     console.error(
