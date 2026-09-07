@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SEK Eignungstest</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #090b0e;
+            color: #eeeeee;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+
+            margin: 0 auto;
+
+            padding: 45px 20px;
+        }
+
+        /* HEADER */
+
+        .header {
+            text-align: center;
+
+            margin-bottom: 35px;
+        }
+
+        .badge {
+            display: inline-block;
+
+            padding: 8px 15px;
+
+            border: 1px solid #363a40;
+            border-radius: 20px;
+
+            color: #999999;
+
+            font-size: 12px;
+
+            letter-spacing: 1.5px;
+
+            margin-bottom: 18px;
+        }
+
+        h1 {
+            margin: 0 0 12px;
+
+            font-size: 38px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: #999999;
+
+            line-height: 1.6;
+
+            max-width: 680px;
+
+            margin: 0 auto;
+        }
+
+        /* CARDS */
+
+        .card {
+            background: #14171b;
+
+            border: 1px solid #292d33;
+
+            border-radius: 14px;
+
+            padding: 30px;
+        }
+
+        /* START */
+
+        .start-info {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 12px;
+
+            margin: 25px 0;
+        }
+
+        .info-box {
+            background: #0d0f12;
+
+            border: 1px solid #292d33;
+
+            border-radius: 10px;
+
+            padding: 18px;
+
+            text-align: center;
+        }
+
+        .info-number {
+            font-size: 22px;
+
+            font-weight: bold;
+
+            margin-bottom: 5px;
+        }
+
+        .info-label {
+            color: #888888;
+
+            font-size: 12px;
+        }
+
+        .notice {
+            background: #0d0f12;
+
+            border: 1px solid #292d33;
+
+            border-radius: 10px;
+
+            padding: 16px;
+
+            color: #999999;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            margin-bottom: 25px;
+        }
+
+        /* INPUT */
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #bbbbbb;
+
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 14px;
+
+            background: #0d0f12;
+
+            border: 1px solid #363a40;
+
+            border-radius: 8px;
+
+            color: white;
+
+            font-size: 16px;
+        }
+
+        input:focus {
+            outline: none;
+
+            border-color: #777777;
+        }
+
+        /* BUTTONS */
+
+        button {
+            font-family: inherit;
+
+            cursor: pointer;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+
+            font-weight: 600;
+        }
+
+        .primary-button {
+            width: 100%;
+
+            padding: 15px;
+
+            background: #e4e4e4;
+
+            color: #111111;
+
+            border: none;
+        }
+
+        .primary-button:hover {
+            background: white;
+        }
+
+        /* QUIZ */
+
+        .hidden {
+            display: none !important;
+        }
+
+        .test-top {
+            margin-bottom: 25px;
+        }
+
+        .test-information {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+
+            margin-bottom: 10px;
+
+            color: #999999;
+
+            font-size: 14px;
+        }
+
+        .timer {
+            color: #eeeeee;
+
+            font-weight: bold;
+
+            font-size: 15px;
+        }
+
+        .progress {
+            width: 100%;
+
+            height: 6px;
+
+            background: #292d33;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 0%;
+
+            height: 100%;
+
+            background: #dddddd;
+
+            transition: width 0.25s ease;
+        }
+
+        .category {
+            color: #888888;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.3px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            margin-bottom: 12px;
+        }
+
+        .question {
+            font-size: 24px;
+
+            line-height: 1.45;
+
+            font-weight: 600;
+
+            margin-bottom: 28px;
+        }
+
+        /* ANSWERS */
+
+        .answers {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+        }
+
+        .answer {
+            width: 100%;
+
+            text-align: left;
+
+            padding: 16px;
+
+            background: #0d0f12;
+
+            border: 1px solid #363a40;
+
+            color: #eeeeee;
+
+            line-height: 1.5;
+
+            transition: 0.15s;
+        }
+
+        .answer:hover {
+            border-color: #777777;
+        }
+
+        .answer.selected {
+            background: #202328;
+
+            border-color: #dddddd;
+        }
+
+        /* OPEN QUESTIONS */
+
+        textarea {
+            width: 100%;
+
+            min-height: 220px;
+
+            resize: vertical;
+
+            padding: 15px;
+
+            background: #0d0f12;
+
+            border: 1px solid #363a40;
+
+            border-radius: 8px;
+
+            color: white;
+
+            font-family: inherit;
+
+            font-size: 15px;
+
+            line-height: 1.6;
+        }
+
+        textarea:focus {
+            outline: none;
+
+            border-color: #777777;
+        }
+
+        .open-hint {
+            color: #777777;
+
+            font-size: 12px;
+
+            margin-top: 8px;
+        }
+
+        /* NEXT */
+
+        .next-button {
+            width: 100%;
+
+            margin-top: 25px;
+
+            padding: 15px;
+
+            background: #dddddd;
+
+            color: #111111;
+
+            border: none;
+        }
+
+        .next-button:hover:not(:disabled) {
+            background: white;
+        }
+
+        .next-button:disabled {
+            opacity: 0.35;
+
+            cursor: not-allowed;
+        }
+
+        /* FINISH */
+
+        .finish {
+            text-align: center;
+
+            padding: 30px 10px;
+        }
+
+        .finish-icon {
+            width: 65px;
+            height: 65px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            margin: 0 auto 20px;
+
+            border-radius: 50%;
+
+            border: 1px solid #444444;
+
+            font-size: 28px;
+        }
+
+        .finish h2 {
+            font-size: 30px;
+
+            margin-bottom: 12px;
+        }
+
+        .finish p {
+            color: #999999;
+
+            line-height: 1.7;
+
+            max-width: 600px;
+
+            margin: 0 auto 10px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 650px) {
+
+            .container {
+                padding: 25px 15px;
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .start-info {
+                grid-template-columns: 1fr;
+            }
+
+            .question {
+                font-size: 20px;
+            }
+
+            .test-information {
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 7px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- ================================= -->
+    <!-- HEADER -->
+    <!-- ================================= -->
+
+    <div class="header">
+
+        <div class="badge">
+            POLIZEI • SPEZIALEINSATZKOMMANDO
+        </div>
+
+        <h1>
+            SEK Eignungstest
+        </h1>
+
+        <p class="subtitle">
+            Theoretische und situative Eignungsprüfung
+            für die Bewerbung beim Spezialeinsatzkommando.
+        </p>
+
+    </div>
+
+
+
+    <!-- ================================= -->
+    <!-- STARTSEITE -->
+    <!-- ================================= -->
+
+    <div
+        id="startScreen"
+        class="card"
+    >
+
+        <div class="input-group">
+
+            <label for="name">
+                Vor- und Nachname
+            </label>
+
+            <input
+                id="name"
+                type="text"
+                placeholder="Max Mustermann"
+            >
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label for="bewerberId">
+                Bewerber-ID / Dienstnummer
+            </label>
+
+            <input
+                id="bewerberId"
+                type="text"
+                placeholder="z. B. 2471"
+            >
+
+        </div>
+
+
+        <div class="start-info">
+
+            <div class="info-box">
+
+                <div class="info-number">
+                    30
+                </div>
+
+                <div class="info-label">
+                    Fragen
+                </div>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <div class="info-number">
+                    30:00
+                </div>
+
+                <div class="info-label">
+                    Minuten
+                </div>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <div class="info-number">
+                    6,5/10
+                </div>
+
+                <div class="info-label">
+                    Schwierigkeitsgrad
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="notice">
+
+            <strong>
+                Hinweis:
+            </strong>
+
+            Während des Tests werden keine Punkte,
+            Lösungen oder Hinweise angezeigt.
+
+            <br><br>
+
+            Erst nach vollständiger Abgabe wird der Test
+            durch die zuständige Stelle ausgewertet.
+
+        </div>
+
+
+        <button
+            id="startButton"
+            class="primary-button"
+        >
+            Eignungstest starten
+        </button>
+
+    </div>
+
+
+
+    <!-- ================================= -->
+    <!-- TEST -->
+    <!-- ================================= -->
+
+    <div
+        id="testScreen"
+        class="hidden"
+    >
+
+
+        <div class="test-top">
+
+            <div class="test-information">
+
+                <span id="questionCounter">
+                    Frage 1 von 30
+                </span>
+
+                <span
+                    id="timer"
+                    class="timer"
+                >
+                    30:00
+                </span>
+
+            </div>
+
+
+            <div class="progress">
+
+                <div
+                    id="progressBar"
+                    class="progress-bar"
+                ></div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="card">
+
+
+            <div
+                id="category"
+                class="category"
+            ></div>
+
+
+            <div
+                id="question"
+                class="question"
+            ></div>
+
+
+            <div
+                id="answers"
+                class="answers"
+            ></div>
+
+
+            <textarea
+                id="openAnswer"
+                class="hidden"
+                placeholder="Begründe deine Antwort möglichst nachvollziehbar..."
+            ></textarea>
+
+
+            <div
+                id="openHint"
+                class="open-hint hidden"
+            >
+                Bitte beantworte die Frage nachvollziehbar.
+            </div>
+
+
+            <button
+                id="nextButton"
+                class="next-button"
+                disabled
+            >
+                Nächste Frage
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ================================= -->
+    <!-- ABSCHLUSS -->
+    <!-- ================================= -->
+
+    <div
+        id="finishScreen"
+        class="card hidden"
+    >
+
+        <div class="finish">
+
+            <div class="finish-icon">
+                ✓
+            </div>
+
+            <h2>
+                Test erfolgreich abgegeben
+            </h2>
+
+            <p>
+                Deine Antworten wurden vollständig
+                erfasst.
+            </p>
+
+            <p>
+                Die Auswertung erfolgt durch die
+                zuständige Stelle.
+            </p>
+
+            <p>
+                Es werden keine Ergebnisse oder
+                Punktzahlen direkt nach dem Test angezeigt.
+            </p>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+/*
+==================================================
+SEK EIGNUNGSTEST
+30 FRAGEN
+30 MINUTEN
+==================================================
+*/
+
+
+const questions = [
+
+
+    /* =========================================
+       MULTIPLE CHOICE
+       ========================================= */
+
+
+    {
+        category: "Allgemeines Verständnis",
+
+        question:
+            "Welche Aussage beschreibt die Aufgabe einer spezialisierten Einheit im RP am treffendsten?",
+
+        answers: [
+
+            "Sie übernimmt möglichst viele normale Streifenaufgaben.",
+
+            "Sie wird eingesetzt, wenn eine Lage besondere Anforderungen an Ausbildung, Koordination oder Vorgehen stellt.",
+
+            "Sie hat grundsätzlich mehr Rechte als andere Polizeikräfte.",
+
+            "Sie sollte bei jedem größeren Einsatz automatisch eingesetzt werden."
+
+        ],
+
+        correct: 1
+
+    },
+
+
+    {
+        category: "Entscheidungsfähigkeit",
+
+        question:
+            "Du erhältst während einer laufenden Lage mehrere widersprüchliche Informationen. Was ist die sinnvollste Reaktion?",
+
+        answers: [
+
+            "Die erste Information bleibt grundsätzlich maßgeblich.",
+
+            "Die widersprüchlichen Informationen werden ignoriert.",
+
+            "Die Lage wird neu bewertet und die wichtigsten Informationen werden geklärt.",
+
+            "Man entscheidet sich immer für die gefährlichste mögliche Variante."
+
+        ],
+
+        correct: 2
+
+    },
+
+
+    {
+        category: "RP-Verständnis",
+
+        question:
+            "Ein Verdächtiger provoziert dich während einer angespannten RP-Situation massiv. Welche Reaktion spricht am ehesten für gutes RP?",
+
+        answers: [
+
+            "Die Provokation persönlich nehmen und entsprechend reagieren.",
+
+            "Die Situation bewusst weiter eskalieren.",
+
+            "Professionell bleiben und die eigene Rolle nicht von Emotionen bestimmen lassen.",
+
+            "Den Verdächtigen ebenfalls provozieren."
+
+        ],
+
+        correct: 2
+
+    },
+
+
+    {
+        category: "Verhältnismäßigkeit",
+
+        question:
+            "Eine Maßnahme könnte zwar zum Ziel führen, wäre aber deutlich härter als notwendig. Was spricht grundsätzlich dagegen?",
+
+        answers: [
+
+            "Nichts, solange das gewünschte Ergebnis erreicht wird.",
+
+            "Der Grundsatz der Verhältnismäßigkeit.",
+
+            "Nur die Meinung des Verdächtigen.",
+
+            "Nur die Anzahl der anwesenden Beamten."
+
+        ],
+
+        correct: 1
+
+    },
+
+
+    {
+        category: "Kommunikation",
+
+        question:
+            "Warum ist klare Kommunikation während einer dynamischen Lage besonders wichtig?",
+
+        answers: [
+
+            "Damit möglichst viele Personen gleichzeitig sprechen können.",
+
+            "Damit jeder Beamte seine eigene Entscheidung treffen kann.",
+
+            "Damit Informationen schnell verstanden werden und Missverständnisse reduziert werden.",
+
+            "Damit der Funk möglichst lange besetzt bleibt."
+
+        ],
+
+        correct: 2
+
+    },
+
+
+    {
+        category: "Teamfähigkeit",
+
+        question:
+            "Ein Teammitglied macht während eines Einsatzes einen Fehler, der noch korrigiert werden kann. Wie verhältst du dich?",
+
+        answers: [
+
+            "Du machst ihn vor dem gesamten Team darauf aufmerksam.",
+
+            "Du ignorierst den Fehler.",
+
+            "Du greifst situationsgerecht ein und sprichst die Sache anschließend sachlich an.",
+
+            "Du verlangst sofort seinen Ausschluss aus dem Team."
+
+        ],
+
+        correct: 2
+
+    },
+
+
+    {
+        category: "Priorisierung",
+
+        question:
+            "Welche Information ist bei einer unübersichtlichen Einsatzlage typischerweise zuerst besonders relevant?",
+
+        answers: [
+
+            "Wer die Einsatzmeldung ursprünglich angenommen hat.",
+
+            "Welche unmittelbare Gefahr für Personen besteht.",
+
+            "Welche Einheit zuerst am Einsatzort war.",
+
+            "Welche Fahrzeuge vor Ort stehen."
+
+        ],
+
+        correct: 1
+
+    },
+
+
+    {
+        category: "Führung",
+
+        question:
+            "Was zeichnet einen guten Teamführer im RP am ehesten aus?",
+
+        answers: [
+
+            "Er entscheidet grundsätzlich alles alleine.",
+
+            "Er übernimmt Verantwortung, kommuniziert klar und berücksichtigt relevante Informationen.",
+
+            "Er gibt möglichst viele Befehle gleichzeitig.",
+
+            "Er vermeidet Entscheidungen, um keine Fehler zu machen."
+
+        ],
+
+        correct: 1
+
+    },
+
+
+    {
+        category: "Stressresistenz",
+
+        question:
+            "Du bist dir unter hohem Zeitdruck nicht sicher, ob du eine wichtige Information richtig verstanden hast. Was ist professionell?",
+
+        answers: [
+
+            "So tun, als wäre alles eindeutig.",
+
+            "Die Information selbstständig verändern.",
+
+            "Nachfragen beziehungsweise die Information verifizieren.",
+
+            "Eine beliebige Entscheidung treffen."
+
+        ],
+
+        correct: 2
+
+    },
+
+
+    {
+        category: "Lagebeurteilung",
+
+        question:
+            "Eine zunächst ruhige Situation verändert sich plötzlich deutlich. Was ist wichtiger als das starre Festhalten am ursprünglichen Plan?",
+
+        answers: [
+
+            "Die eigene ursprüngliche Einschätzung zu verteidigen.",
+
+            "Die Geschwindigkeit um jeden Preis.",
+
+            "Die Anpassung an die neue Lage.",
+
+            "Die Meinung der unbeteiligten Personen."
+
+        ],
+
+        correct: 2
+
+    },
+
+
+    {
+        category: "RP-Verständnis",
+
+        question:
+            "Warum sollte ein SEK-Einsatz im RP nicht als reine 'Action um der Action willen' verstanden werden?",
+
+        answers: [
+
+            "Weil Spezialeinheiten im RP möglichst wenig machen sollten.",
+
+            "Weil glaubwürdiges RP auch Vorbereitung, Kommunikation und nachvollziehbare Entscheidungen beinhaltet.",
+
+            "Weil nur normale Polizeieinheiten aktiv handeln dürfen.",
+
+            "Weil Bewerber keine eigenen Entscheidungen treffen sollten."
+
+        ],
+
+        correct: 1
+
+    },
+
+
+    {
+        category: "Teamfähigkeit",
+
+        question:
+            "Zwei Teammitglieder haben unterschiedliche Einschätzungen einer Lage. Was ist am sinnvollsten?",
+
+        answers: [
+
+            "Derjenige mit der lauteren Stimme entscheidet.",
+
+            "Beide ignorieren die Einschätzung des jeweils anderen.",
+
+            "Relevante Argumente werden ausgetauscht und anschließend wird eine klare Entscheidung getroffen.",
+
+            "Der Konflikt wird während des Einsatzes ausgetragen."
+
+        ],
+
+        correct: 2
+
+    },
+
+
+    {
+        category: "Verantwortung",
+
+        question:
+            "Nach einem Einsatz stellst du fest, dass deine eigene Entscheidung nicht optimal war. Welche Haltung ist professionell?",
+
+        answers: [
+
+            "Den Fehler möglichst anderen zuschieben.",
+
+            "Den Fehler verschweigen.",
+
+            "Die Entscheidung reflektieren und daraus lernen.",
+
+            "Die Situation nachträglich schönreden."
+
+        ],
+
+        correct: 2
+
+    },
+
+
+    {
+        category: "Kommunikation",
+
+        question:
+            "Welche Funkmeldung ist während einer hektischen Situation grundsätzlich am geeignetsten?",
+
+        answers: [
+
+            "Eine möglichst lange Erklärung mit allen Nebendetails.",
+
+            "Eine kurze, relevante und eindeutig formulierte Information.",
+
+            "Mehrere Informationen gleichzeitig und ohne Reihenfolge.",
+
+            "Eine emotionale Einschätzung der beteiligten Personen."
+
+        ],
+
+        correct: 1
+
+    },
+
+
+    {
+        category: "Situationsbewusstsein",
+
+        question:
+            "Du beobachtest etwas, das nicht zu deiner bisherigen Einschätzung passt. Was solltest du vermeiden?",
+
+        answers: [
+
+            "Die Beobachtung ernst zu nehmen.",
+
+            "Die Lage neu zu bewerten.",
+
+            "Ungeprüft an der bisherigen Annahme festzuhalten.",
+
+            "Die neue Information an dein Team weiterzugeben."
+
+        ],
+
+        correct: 2
+
+    },
+
+
+    {
+        category: "Entscheidungsfähigkeit",
+
+        question:
+            "Was ist bei einer schwierigen Entscheidung grundsätzlich besser?",
+
+        answers: [
+
+            "Eine nachvollziehbare Entscheidung auf Basis der verfügbaren Informationen.",
+
+            "Eine zufällige Entscheidung.",
+
+            "Gar keine Entscheidung, obwohl Handeln erforderlich ist.",
+
+            "Eine Entscheidung ausschließlich nach persönlicher Sympathie."
+
+        ],
+
+        correct: 0
+
+    },
+
+
+    {
+        category: "Konfliktfähigkeit",
+
+        question:
+            "Ein Kollege kritisiert deine Entscheidung sachlich. Wie solltest du damit umgehen?",
+
+        answers: [
+
+            "Sachliche Kritik grundsätzlich als persönlichen Angriff verstehen.",
+
+            "Die Kritik prüfen und gegebenenfalls daraus lernen.",
+
+            "Den Kollegen sofort aus dem Team entfernen lassen.",
+
+            "Die Kritik ignorieren."
+
+        ],
+
+        correct: 1
+
+    },
+
+
+    {
+        category: "Priorisierung",
+
+        question:
+            "Welche Situation verlangt grundsätzlich eine besonders schnelle Neubewertung?",
+
+        answers: [
+
+            "Eine Änderung der Wetterlage.",
+
+            "Eine plötzlich auftretende unmittelbare Gefahr für Personen.",
+
+            "Ein falsch geparktes Fahrzeug außerhalb der Einsatzlage.",
+
+            "Eine Diskussion über Dienstkleidung."
+
+        ],
+
+        correct: 1
+
+    },
+
+
+    {
+        category: "Disziplin",
+
+        question:
+            "Was bedeutet Disziplin innerhalb eines Einsatzteams am ehesten?",
+
+        answers: [
+
+            "Blind zu gehorchen und niemals nachzudenken.",
+
+            "Vereinbarte Abläufe einzuhalten, Verantwortung zu übernehmen und kontrolliert zu handeln.",
+
+            "Keine eigene Meinung zu besitzen.",
+
+            "Andere Personen grundsätzlich zu überstimmen."
+
+        ],
+
+        correct: 1
+
+    },
+
+
+    {
+        category: "Führung",
+
+        question:
+            "Wann ist es sinnvoll, eine Entscheidung eines Vorgesetzten anzusprechen?",
+
+        answers: [
+
+            "Immer lautstark vor allen Beteiligten.",
+
+            "Wenn relevante Bedenken bestehen und es die Situation zulässt, sachlich und professionell.",
+
+            "Nur wenn man die Person persönlich nicht mag.",
+
+            "Niemals."
+
+        ],
+
+        correct: 1
+
+    },
+
+
+    {
+        category: "Lagebeurteilung",
+
+        question:
+            "Was spricht im RP am ehesten für gutes taktisches Denkvermögen?",
+
+        answers: [
+
+            "Möglichst aggressiv aufzutreten.",
+
+            "Mehrere mögliche Entwicklungen mitzudenken und Prioritäten zu erkennen.",
+
+            "Immer dieselbe Vorgehensweise zu verwenden.",
+
+            "Möglichst viele Personen gleichzeitig einzusetzen."
+
+        ],
+
+        correct: 1
+
+    },
+
+
+    {
+        category: "Eigensicherung",
+
+        question:
+            "Warum sollte ein Team auch bei einer scheinbar kontrollierten Situation aufmerksam bleiben?",
+
+        answers: [
+
+            "Weil jede Situation völlig eskalieren muss.",
+
+            "Weil sich die Lage jederzeit verändern kann und neue Informationen berücksichtigt werden müssen.",
+
+            "Damit der Einsatz möglichst lange dauert.",
+
+            "Damit möglichst viele Personen beteiligt werden."
+
+        ],
+
+        correct: 1
+
+    },
+
+
+    /* =========================================
+       OFFENE FALLFRAGEN
+       ========================================= */
+
+
+    {
+        category: "Fallbeispiel",
+
+        question:
+            "Du wirst zu einer angespannten Lage gerufen. Die Informationen aus der ersten Meldung sind unvollständig und teilweise widersprüchlich. Welche Informationen würdest du zuerst klären und warum?",
+
+        open: true
+
+    },
+
+
+    {
+        category: "Fallbeispiel",
+
+        question:
+            "Du bist Teil eines Teams und bemerkst, dass die Kommunikation während einer dynamischen Situation zunehmend unübersichtlich wird. Wie würdest du reagieren, ohne die Situation unnötig weiter zu verschärfen?",
+
+        open: true
+
+    },
+
+
+    {
+        category: "Fallbeispiel",
+
+        question:
+            "Ein Kollege möchte in einer Situation eine deutlich härtere Maßnahme ergreifen, während du die Lage für weniger kritisch hältst. Wie gehst du mit dieser unterschiedlichen Einschätzung um?",
+
+        open: true
+
+    },
+
+
+    {
+        category: "Fallbeispiel",
+
+        question:
+            "Nach einer abgeschlossenen Einsatzlage stellt sich heraus, dass eine wichtige Information innerhalb des Teams falsch weitergegeben wurde. Wie sollte ein gutes Team deiner Meinung nach damit umgehen?",
+
+        open: true
+
+    },
+
+
+    {
+        category: "Entscheidungsfähigkeit",
+
+        question:
+            "Du musst innerhalb kurzer Zeit eine Entscheidung treffen, verfügst aber nicht über alle Informationen. Wie gehst du mit dieser Unsicherheit um?",
+
+        open: true
+
+    },
+
+
+    {
+        category: "Lagebeurteilung",
+
+        question:
+            "Eine Person verhält sich zunächst kooperativ. Im weiteren Verlauf verändert sich die Situation deutlich. Welche Faktoren würdest du bei deiner neuen Einschätzung berücksichtigen?",
+
+        open: true
+
+    },
+
+
+    {
+        category: "Motivation",
+
+        question:
+            "Warum möchtest du dem SEK beitreten? Welche Eigenschaften bringst du deiner Meinung nach dafür mit und welche Eigenschaften möchtest du noch verbessern?",
+
+        open: true
+
+    },
+
+
+    {
+        category: "Selbsteinschätzung",
+
+        question:
+            "Nenne eine persönliche Stärke und eine persönliche Schwäche von dir, die in einem SEK-Team relevant sein könnten. Erkläre kurz, wie du damit umgehen würdest.",
+
+        open: true
+
+    }
+
+];
+
+
+
+/*
+==================================================
+VARIABLEN
+==================================================
+*/
+
+
+let currentQuestion = 0;
+
+let selectedAnswer = null;
+
+let submittedAnswers = [];
+
+let timeRemaining = 30 * 60;
+
+let timerInterval = null;
+
+
+
+/*
+==================================================
+ELEMENTE
+==================================================
+*/
+
+
+const startScreen =
+    document.getElementById("startScreen");
+
+
+const testScreen =
+    document.getElementById("testScreen");
+
+
+const finishScreen =
+    document.getElementById("finishScreen");
+
+
+const startButton =
+    document.getElementById("startButton");
+
+
+const nextButton =
+    document.getElementById("nextButton");
+
+
+const questionCounter =
+    document.getElementById("questionCounter");
+
+
+const progressBar =
+    document.getElementById("progressBar");
+
+
+const timer =
+    document.getElementById("timer");
+
+
+const category =
+    document.getElementById("category");
+
+
+const question =
+    document.getElementById("question");
+
+
+const answers =
+    document.getElementById("answers");
+
+
+const openAnswer =
+    document.getElementById("openAnswer");
+
+
+const openHint =
+    document.getElementById("openHint");
+
+
+
+/*
+==================================================
+TEST STARTEN
+==================================================
+*/
+
+
+startButton.addEventListener(
+    "click",
+    function() {
+
+        const name =
+            document
+                .getElementById("name")
+                .value
+                .trim();
+
+
+        const bewerberId =
+            document
+                .getElementById("bewerberId")
+                .value
+                .trim();
+
+
+        if (!name || !bewerberId) {
+
+            alert(
+                "Bitte Vor- und Nachnamen sowie die Bewerber-ID eingeben."
+            );
+
+            return;
+        }
+
+
+        currentQuestion = 0;
+
+        selectedAnswer = null;
+
+        submittedAnswers = [];
+
+        timeRemaining = 30 * 60;
+
+
+        startScreen.classList.add(
+            "hidden"
+        );
+
+
+        testScreen.classList.remove(
+            "hidden"
+        );
+
+
+        showQuestion();
+
+        startTimer();
+
+    }
+);
+
+
+
+/*
+==================================================
+FRAGE ANZEIGEN
+==================================================
+*/
+
+
+function showQuestion() {
+
+    const current =
+        questions[currentQuestion];
+
+
+    selectedAnswer = null;
+
+
+    nextButton.disabled = true;
+
+
+    answers.innerHTML = "";
+
+
+    openAnswer.value = "";
+
+
+    openAnswer.classList.add(
+        "hidden"
+    );
+
+
+    openHint.classList.add(
+        "hidden"
+    );
+
+
+    questionCounter.textContent =
+        "Frage " +
+        (currentQuestion + 1) +
+        " von " +
+        questions.length;
+
+
+    progressBar.style.width =
+        (
+            (currentQuestion + 1)
+            /
+            questions.length
+            *
+            100
+        ) +
+        "%";
+
+
+    category.textContent =
+        current.category;
+
+
+    question.textContent =
+        current.question;
+
+
+    /*
+    ------------------------------------------
+    OFFENE FRAGE
+    ------------------------------------------
+    */
+
+
+    if (current.open) {
+
+        openAnswer.classList.remove(
+            "hidden"
+        );
+
+
+        openHint.classList.remove(
+            "hidden"
+        );
+
+
+        openAnswer.addEventListener(
+            "input",
+            checkOpenAnswer
+        );
+
+
+        return;
+    }
+
+
+    /*
+    ------------------------------------------
+    MULTIPLE CHOICE
+    ------------------------------------------
+    */
+
+
+    current.answers.forEach(
+        function(answerText, index) {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+
+            button.type =
+                "button";
+
+
+            button.className =
+                "answer";
+
+
+            button.textContent =
+                String.fromCharCode(
+                    65 + index
+                ) +
+                ") " +
+                answerText;
+
+
+            button.addEventListener(
+                "click",
+                function() {
+
+                    selectedAnswer =
+                        index;
+
+
+                    const allAnswers =
+                        answers.querySelectorAll(
+                            ".answer"
+                        );
+
+
+                    allAnswers.forEach(
+                        function(element) {
+
+                            element.classList.remove(
+                                "selected"
+                            );
+
+                        }
+                    );
+
+
+                    button.classList.add(
+                        "selected"
+                    );
+
+
+                    nextButton.disabled =
+                        false;
+
+                }
+            );
+
+
+            answers.appendChild(
+                button
+            );
+
+        }
+    );
+
+}
+
+
+
+/*
+==================================================
+OFFENE FRAGE PRÜFEN
+==================================================
+*/
+
+
+function checkOpenAnswer() {
+
+    const text =
+        openAnswer.value.trim();
+
+
+    /*
+    Mindestens 30 Zeichen,
+    damit nicht einfach ein einzelnes
+    Wort eingegeben wird.
+    */
+
+
+    if (text.length >= 30) {
+
+        nextButton.disabled =
+            false;
+
+    } else {
+
+        nextButton.disabled =
+            true;
+
+    }
+
+}
+
+
+
+/*
+==================================================
+NÄCHSTE FRAGE
+==================================================
+*/
+
+
+nextButton.addEventListener(
+    "click",
+    function() {
+
+        const current =
+            questions[currentQuestion];
+
+
+        /*
+        --------------------------------------
+        MULTIPLE CHOICE SPEICHERN
+        --------------------------------------
+        */
+
+
+        if (!current.open) {
+
+            if (selectedAnswer === null) {
+
+                return;
+
+            }
+
+
+            submittedAnswers.push({
+
+                question:
+                    current.question,
+
+                answer:
+                    selectedAnswer,
+
+                type:
+                    "multiple"
+
+            });
+
+        }
+
+
+        /*
+        --------------------------------------
+        OFFENE FRAGE SPEICHERN
+        --------------------------------------
+        */
+
+
+        else {
+
+            const text =
+                openAnswer.value.trim();
+
+
+            if (text.length < 30) {
+
+                return;
+
+            }
+
+
+            submittedAnswers.push({
+
+                question:
+                    current.question,
+
+                answer:
+                    text,
+
+                type:
+                    "open"
+
+            });
+
+        }
+
+
+        /*
+        --------------------------------------
+        NÄCHSTE FRAGE
+        --------------------------------------
+        */
+
+
+        currentQuestion++;
+
+
+        if (
+            currentQuestion
+            >=
+            questions.length
+        ) {
+
+            finishTest();
+
+            return;
+
+        }
+
+
+        showQuestion();
+
+    }
+);
+
+
+
+/*
+==================================================
+TIMER
+==================================================
+*/
+
+
+function startTimer() {
+
+    clearInterval(
+        timerInterval
+    );
+
+
+    updateTimer();
+
+
+    timerInterval =
+        setInterval(
+            function() {
+
+                timeRemaining--;
+
+
+                updateTimer();
+
+
+                if (
+                    timeRemaining
+                    <=
+                    0
+                ) {
+
+                    clearInterval(
+                        timerInterval
+                    );
+
+
+                    finishTest();
+
+                }
+
+            },
+            1000
+        );
+
+}
+
+
+
+function updateTimer() {
+
+    const minutes =
+        Math.floor(
+            timeRemaining / 60
+        );
+
+
+    const seconds =
+        timeRemaining % 60;
+
+
+    timer.textContent =
+        String(minutes).padStart(
+            2,
+            "0"
+        ) +
+        ":" +
+        String(seconds).padStart(
+            2,
+            "0"
+        );
+
+}
+
+
+
+/*
+==================================================
+TEST BEENDEN
+==================================================
+*/
+
+
+function finishTest() {
+
+    clearInterval(
+        timerInterval
+    );
+
+
+    testScreen.classList.add(
+        "hidden"
+    );
+
+
+    finishScreen.classList.remove(
+        "hidden"
+    );
+
+
+    /*
+    ------------------------------------------
+    AKTUELLER STAND
+    ------------------------------------------
+
+    Die Antworten werden momentan nur
+    innerhalb dieser Testseite gehalten.
+
+    Im nächsten Schritt verbinden wir
+    das mit Supabase.
+
+    Dann werden die Antworten wirklich
+    gespeichert und du kannst sie im
+    Admin-Bereich auswerten.
+    ------------------------------------------
+    */
+
+
+    console.log(
+        "Test abgegeben:",
+        submittedAnswers
+    );
+
+}
+
+</script>
+
+</body>
+</html>
